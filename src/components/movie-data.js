@@ -42,6 +42,7 @@ const MovieData = () => {
   }
 
   if (Object.keys(movie) !== 0) {
+    console.log(genres);
     return (
       <section className="movie-data">
         <div className="poster-wrapper">
@@ -77,6 +78,12 @@ const MovieData = () => {
               <p>
                 Stars : <span>Tom Cruise, Jennifer Connelly, Miles Teller</span>
               </p>
+              <div className="genres flex">
+                {genres &&
+                  genres.map((genre) => (
+                    <span className="genre">{genre.name}</span>
+                  ))}
+              </div>
               <div className="flex-2">
                 <div className="flex-3">
                   <button>Top Rated Movie #65</button>
