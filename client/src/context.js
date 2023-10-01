@@ -7,7 +7,6 @@ const url =
 
 const baseUrl = "https://api.themoviedb.org/3/movie/";
 const apiKey = "?api_key=f0757f1146ccbe0c1de0425e245dd645&page=1";
-
 const searchUrl =
   'https://api.themoviedb.org/3/search/movie?api_key=f0757f1146ccbe0c1de0425e245dd645&query="';
 

@@ -2,9 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import LogoIcon from "../icons/tv.png";
 import LoaderGif from "../icons/myloader.gif";
-import { FaRedo } from "react-icons/fa";
-import { FaSearch } from "react-icons/fa";
-import { FaTimes } from "react-icons/fa";
+import { FaRedo, FaSearch, FaTimes } from "react-icons/fa";
 import { useGlobalContext } from "../context";
 
 export const Logo = () => {

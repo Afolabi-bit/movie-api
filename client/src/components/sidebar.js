@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
 import { Logo } from "./utils";
-import home from "../icons/Home.png";
-import projector from "../icons/MovieProjector.png";
-import tv from "../icons/TVShow.png";
-import logout from "../icons/Logout.png";
-import calender from "../icons/Calendar.png";
+import { FaHome } from "react-icons/fa";
+import { ImVideoCamera as Projector } from "react-icons/im";
+import { FaTv, FaCalendarDays as Calendar } from "react-icons/fa6";
+import { GrLogout as Logout } from "react-icons/gr";
 
 const Sidebar = () => {
   return (
@@ -12,19 +11,19 @@ const Sidebar = () => {
       <Logo />
       <div className="links-wrapper column">
         <Link to={"/"} className="center">
-          <img src={home} alt="icon" />
+          <FaHome />
           <span>Home</span>
         </Link>
         <Link to={"/"} className="center active">
-          <img src={projector} alt="icon" />
+          <Projector />
           <span>Movies</span>
         </Link>
         <Link to={"/"} className="center">
-          <img src={tv} alt="icon" />
+          <FaTv />
           <span>TV Series</span>
         </Link>
         <Link to={"/"} className="center">
-          <img src={calender} alt="icon" />
+          <Calendar />
           <span>Upcoming</span>
         </Link>
       </div>
@@ -35,7 +34,7 @@ const Sidebar = () => {
           <button>Start playing</button>
         </div>
         <button className="logout">
-          <img src={logout} alt="icon" />
+          <Logout />
           <span>Log out</span>
         </button>
       </div>
