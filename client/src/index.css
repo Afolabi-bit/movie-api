@@ -805,6 +805,12 @@ button.search-btn.times {
     display: none;
   }
 
+  .sidebar .logout {
+    text-align: center;
+    width: 100%;
+    transform: translateX(11px);
+  }
+
   .movie-data {
     width: calc(100% - 100px);
     margin-top: 10px;
@@ -941,9 +947,6 @@ button.search-btn.times {
     font-size: 35px;
     margin-bottom: 25px;
     word-wrap: break-word;
-  }
-
-  .error-page p {
   }
 
   .error-page .img img {
