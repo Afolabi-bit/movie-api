@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import Sidebar from "../components/sidebar";
-import MovieData from "../components/movie-data";
+import SeriesData from "../components/seriesData";
 
-const Movie = () => {
+const Series = () => {
   return (
     <main className="movie flex">
-      <Sidebar type={"movie"} />
-      <MovieData />
+      <Sidebar type={"series"} />
+      <SeriesData />
     </main>
   );
 };
 
-export default Movie;
+export default Series;

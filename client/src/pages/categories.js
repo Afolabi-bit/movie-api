@@ -18,6 +18,7 @@ const Categories = () => {
     trendingTV,
     trendingPerson,
     nowPlaying,
+    upcoming,
     popularTV,
   } = useGlobalContext();
 
@@ -35,6 +36,16 @@ const Categories = () => {
           <div className="catalogue">
             <h5>Movies</h5>
             <Carousel movieList={nowPlaying} type={"movie"} />
+          </div>
+        </article>
+        <article className="upcoming">
+          <div className="flex category-title center">
+            <h3>Upcoming</h3>
+            <FaCirclePlay />
+          </div>
+          <div className="catalogue">
+            <h5>Movies</h5>
+            <Carousel movieList={upcoming} type={"movie"} />
           </div>
         </article>
 

@@ -9,8 +9,17 @@ import Star from "../icons/Star.png";
 import { Loader } from "../components/utils";
 import { useParams } from "react-router-dom";
 import { Reload } from "../components/utils";
+import YouTube from "react-youtube";
+
 const MovieData = () => {
-  const { setMovieId, movie, loading, requestFailed } = useGlobalContext();
+  const {
+    setMovieId,
+    movie,
+    loading,
+    requestFailed /* 
+    playTrailer,
+    setPlayTrailer, */,
+  } = useGlobalContext();
   const { id } = useParams();
 
   useEffect(() => {
@@ -51,12 +60,16 @@ const MovieData = () => {
             src={`https://image.tmdb.org/t/p/original${img}`}
             alt="poster"
           />
-          <div className="play-wrapper center">
+          <button
+            /* onClick={() => setPlayTrailer(true)} */
+            className="play-wrapper center"
+          >
             <img src={play} alt="icon" />
-          </div>
+          </button>
+          {/* {playTrailer && <YouTube />} */}
         </div>
 
-        <article className="details flex-2">
+        <article className="details flex">
           <div className="text">
             <div className="dynamic-details flex">
               <p className="title">{title}</p>
@@ -80,8 +93,10 @@ const MovieData = () => {
               </p>
               <div className="genres flex">
                 {genres &&
-                  genres.map((genre) => (
-                    <span className="genre">{genre.name}</span>
+                  genres.map((genre, index) => (
+                    <span key={index} className="genre">
+                      {genre.name}
+                    </span>
                   ))}
               </div>
               <div className="flex-2">

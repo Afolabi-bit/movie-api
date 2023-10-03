@@ -5,6 +5,7 @@ export const AppContext = createContext();
 
 const trendingMovie = "https://api.themoviedb.org/3/trending/movie/day";
 const baseUrl = "https://api.themoviedb.org/3/movie/";
+const baseSeriesUrl = "https://api.themoviedb.org/3/tv/";
 const searchUrl = "https://api.themoviedb.org/3/search/movie";
 const apiKey = "?api_key=f0757f1146ccbe0c1de0425e245dd645";
 const topRatedMoviesUrl = "https://api.themoviedb.org/3/movie/top_rated";
@@ -15,6 +16,7 @@ const trendingMovieUrl = "https://api.themoviedb.org/3/trending/movie/day";
 const trendingTVUrl = "https://api.themoviedb.org/3/trending/tv/day";
 const trendingPersonUrl = "https://api.themoviedb.org/3/trending/person/day";
 const nowPlayingUrl = "https://api.themoviedb.org/3/movie/now_playing";
+const upcomingUrl = "https://api.themoviedb.org/3/movie/upcoming";
 
 export const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
@@ -28,9 +30,12 @@ export const AppProvider = ({ children }) => {
   const [trendingTV, setTrendingTV] = useState([]);
   const [trendingPerson, setTrendingPerson] = useState([]);
   const [nowPlaying, setNowPlaying] = useState([]);
+  const [upcoming, setUpcoming] = useState([]);
   const [pageNo, setPageNo] = useState(1);
   const [movieId, setMovieId] = useState(0);
+  const [seriesId, setSeriesId] = useState(0);
   const [movie, setMovie] = useState({});
+  const [series, setSeries] = useState({});
   const [isSearching, setIsSearching] = useState(false);
   const [requestFailed, setRequestFailed] = useState(false);
   const [reload, setReload] = useState(false);
@@ -53,6 +58,22 @@ export const AppProvider = ({ children }) => {
         });
     }
   }, [movieId, reload]);
+  useEffect(() => {
+    if (seriesId !== 0) {
+      setLoading(true);
+      fetch(`${baseSeriesUrl}${seriesId}${apiKey}&page=1`)
+        .then((res) => res.json())
+        .then((data) => {
+          setSeries(data);
+          setRequestFailed(false);
+          setLoading(false);
+        })
+        .catch((err) => {
+          setLoading(false);
+          setRequestFailed(true);
+        });
+    }
+  }, [seriesId, reload]);
 
   /** Search  */
 
@@ -193,6 +214,18 @@ export const AppProvider = ({ children }) => {
       });
   }, []);
 
+  /** Upcoming */
+  useEffect(() => {
+    fetch(`${upcomingUrl}${apiKey}&page=${pageNo}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setUpcoming(data.results);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <AppContext.Provider
       value={{
@@ -217,6 +250,9 @@ export const AppProvider = ({ children }) => {
         trendingTV,
         trendingPerson,
         nowPlaying,
+        upcoming,
+        series,
+        setSeriesId,
       }}
     >
       {children}

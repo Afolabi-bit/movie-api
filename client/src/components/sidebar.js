@@ -5,7 +5,7 @@ import { ImVideoCamera as Projector } from "react-icons/im";
 import { FaTv, FaCalendarDays as Calendar } from "react-icons/fa6";
 import { GrLogout as Logout } from "react-icons/gr";
 
-const Sidebar = () => {
+const Sidebar = ({ type }) => {
   return (
     <aside className="column sidebar">
       <Logo />
@@ -14,15 +14,21 @@ const Sidebar = () => {
           <FaHome />
           <span>Home</span>
         </Link>
-        <Link to={"/"} className="center active">
+        <Link
+          to={"/categories"}
+          className={type == "movie" ? "center active" : "center"}
+        >
           <Projector />
           <span>Movies</span>
         </Link>
-        <Link to={"/"} className="center">
+        <Link
+          to={"/categories"}
+          className={type == "series" ? "center active" : "center"}
+        >
           <FaTv />
           <span>TV Series</span>
         </Link>
-        <Link to={"/"} className="center">
+        <Link to={"/categories"} className="center">
           <Calendar />
           <span>Upcoming</span>
         </Link>
