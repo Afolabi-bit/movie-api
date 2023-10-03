@@ -9,8 +9,11 @@ import Star from "../icons/Star.png";
 import { Loader } from "../components/utils";
 import { Link, useParams } from "react-router-dom";
 import { Reload } from "../components/utils";
+import YouTube from "react-youtube";
+
 const SeriesData = () => {
-  const { setSeriesId, series, loading, requestFailed } = useGlobalContext();
+  const { setSeriesId, series, loading, requestFailed, openYT, setOpenYT } =
+    useGlobalContext();
   const { id } = useParams();
 
   useEffect(() => {
@@ -29,7 +32,10 @@ const SeriesData = () => {
     number_of_episodes: episodes,
     status,
     seasons: seasonsList,
+    videos,
   } = series;
+
+  let youTubeKey;
 
   if (loading) {
     return (
@@ -43,7 +49,13 @@ const SeriesData = () => {
     return <Reload />;
   }
 
-  if (Object.keys(series) !== 0) {
+  if (Object.keys(series) !== 0 && videos) {
+    console.log(videos.results);
+    videos.results.map((video) => {
+      if (video.name === "Official Trailer" && video.type === "Trailer") {
+        youTubeKey = video.key;
+      }
+    });
     return (
       <section className="series movie-data">
         <div className="poster-wrapper">
@@ -52,9 +64,18 @@ const SeriesData = () => {
             src={`https://image.tmdb.org/t/p/original${img}`}
             alt="poster"
           />
-          <div className="play-wrapper center">
+          <button
+            onClick={() => setOpenYT(true)}
+            className="play-wrapper center"
+          >
             <img src={play} alt="icon" />
-          </div>
+          </button>
+
+          {openYT && (
+            <div className="yt">
+              <YouTube videoId={youTubeKey} />
+            </div>
+          )}
         </div>
 
         <article className="details flex">

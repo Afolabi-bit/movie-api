@@ -142,7 +142,6 @@ button.search-btn.times {
 /* Hero section */
 .hero-wrapper {
   height: 600px;
-  background-image: url("./icons/hero.png");
   color: #fff;
   position: relative;
 }
@@ -349,7 +348,7 @@ button.search-btn.times {
 }
 
 .sidebar .logo {
-  margin-bottom: 50px;
+  margin-bottom: 0px;
 }
 
 .sidebar a {
@@ -455,6 +454,21 @@ button.search-btn.times {
 .movie-data {
   width: calc(100% - 226px);
   padding: 30px 30px 50px 30px;
+}
+
+.yt {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+.yt iframe,
+.yt > div {
+  width: 100%;
+  border-radius: 20px;
+  height: 100%;
 }
 
 .movie-data .poster-wrapper {

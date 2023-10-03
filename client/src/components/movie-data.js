@@ -12,14 +12,8 @@ import { Reload } from "../components/utils";
 import YouTube from "react-youtube";
 
 const MovieData = () => {
-  const {
-    setMovieId,
-    movie,
-    loading,
-    requestFailed /* 
-    playTrailer,
-    setPlayTrailer, */,
-  } = useGlobalContext();
+  const { setMovieId, movie, loading, requestFailed, openYT, setOpenYT } =
+    useGlobalContext();
   const { id } = useParams();
 
   useEffect(() => {
@@ -27,6 +21,7 @@ const MovieData = () => {
   }, [id]);
 
   const {
+    adult,
     poster_path: img,
     title,
     overview,
@@ -34,9 +29,12 @@ const MovieData = () => {
     runtime,
     genres,
     vote_average: rating,
+    videos,
   } = movie;
   let min;
   runtime % 60 < 10 ? (min = `0${runtime % 60}`) : (min = runtime % 60);
+
+  let youTubeKey;
 
   if (loading) {
     return (
@@ -50,8 +48,13 @@ const MovieData = () => {
     return <Reload />;
   }
 
-  if (Object.keys(movie) !== 0) {
-    console.log(genres);
+  if (Object.keys(movie) !== 0 && videos) {
+    console.log(videos.results);
+    videos.results.forEach((video) => {
+      if (video.type === "Trailer") {
+        youTubeKey = video.key;
+      }
+    });
     return (
       <section className="movie-data">
         <div className="poster-wrapper">
@@ -61,12 +64,17 @@ const MovieData = () => {
             alt="poster"
           />
           <button
-            /* onClick={() => setPlayTrailer(true)} */
+            onClick={() => setOpenYT(true)}
             className="play-wrapper center"
           >
             <img src={play} alt="icon" />
           </button>
-          {/* {playTrailer && <YouTube />} */}
+
+          {openYT && (
+            <div className="yt">
+              <YouTube videoId={youTubeKey} />
+            </div>
+          )}
         </div>
 
         <article className="details flex">
@@ -76,7 +84,7 @@ const MovieData = () => {
               <p className="dot"></p>
               <p className="year">{date ? date.split("-")[0] : date}</p>
               <p className="dot"></p>
-              <p className="pg">pg-13</p>
+              <p className="pg">{adult ? "Rated: R" : "PG-13"}</p>
               <p className="dot"></p>
               <p>{`${Math.trunc(runtime / 60)}h ${min}m`}</p>
             </div>

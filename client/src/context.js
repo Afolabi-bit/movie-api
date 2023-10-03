@@ -39,37 +39,43 @@ export const AppProvider = ({ children }) => {
   const [isSearching, setIsSearching] = useState(false);
   const [requestFailed, setRequestFailed] = useState(false);
   const [reload, setReload] = useState(false);
+  const [openYT, setOpenYT] = useState(false);
 
   /** Movie data */
 
   useEffect(() => {
     if (movieId !== 0) {
       setLoading(true);
-      fetch(`${baseUrl}${movieId}${apiKey}&page=1`)
+      fetch(`${baseUrl}${movieId}${apiKey}&append_to_response=videos`)
         .then((res) => res.json())
         .then((data) => {
           setMovie(data);
+          setOpenYT(false);
           setRequestFailed(false);
           setLoading(false);
         })
         .catch((err) => {
           setLoading(false);
           setRequestFailed(true);
+          setOpenYT(false);
         });
     }
   }, [movieId, reload]);
+
   useEffect(() => {
     if (seriesId !== 0) {
       setLoading(true);
-      fetch(`${baseSeriesUrl}${seriesId}${apiKey}&page=1`)
+      fetch(`${baseSeriesUrl}${seriesId}${apiKey}&append_to_response=videos`)
         .then((res) => res.json())
         .then((data) => {
           setSeries(data);
+          setOpenYT(false);
           setRequestFailed(false);
           setLoading(false);
         })
         .catch((err) => {
           setLoading(false);
+          setOpenYT(false);
           setRequestFailed(true);
         });
     }
@@ -253,6 +259,8 @@ export const AppProvider = ({ children }) => {
         upcoming,
         series,
         setSeriesId,
+        openYT,
+        setOpenYT,
       }}
     >
       {children}
