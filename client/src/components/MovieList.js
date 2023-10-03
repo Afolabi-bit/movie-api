@@ -1,10 +1,10 @@
 import Card from "./card";
 import { useGlobalContext } from "../context";
-import { Loader } from "../components/utils";
-import { Reload } from "../components/utils";
+import { Loader, Reload, Pagination } from "../components/utils";
 
 const MovieList = () => {
-  const { searchTerm, loading, movieList, requestFailed } = useGlobalContext();
+  const { searchTerm, loading, movieList, requestFailed, pageNo, setPageNo } =
+    useGlobalContext();
 
   if (loading) {
     return <Loader />;
@@ -35,13 +35,17 @@ const MovieList = () => {
       </div>
     );
   }
+
   if (movieList.length > 0) {
     return (
-      <article className="movieList">
-        {movieList.map((movie) => {
-          return <Card key={movie.id} {...movie} />;
-        })}
-      </article>
+      <>
+        <article className="movieList">
+          {movieList.map((movie) => {
+            return <Card key={movie.id} {...movie} />;
+          })}
+        </article>
+        <Pagination />
+      </>
     );
   }
 };
