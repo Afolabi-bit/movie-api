@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useGlobalContext } from "../context";
-import play from "../icons/Play_poster.png";
 import arrow from "../icons/ExpandArrow.png";
 import rectangle from "../icons/Rectangle.png";
 import Tickets from "../icons/Tickets.png";
@@ -10,6 +9,8 @@ import { Loader } from "../components/utils";
 import { useParams } from "react-router-dom";
 import { Reload } from "../components/utils";
 import YouTube from "react-youtube";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const MovieData = () => {
   const { setMovieId, movie, loading, requestFailed, openYT, setOpenYT } =
@@ -19,6 +20,10 @@ const MovieData = () => {
   useEffect(() => {
     setMovieId(id);
   }, [id]);
+
+  useEffect(() => {
+    AOS.init({ duration: 1000, offset: 180 });
+  }, []);
 
   const {
     adult,
@@ -56,25 +61,11 @@ const MovieData = () => {
       }
     });
     return (
-      <section className="movie-data">
-        <div className="poster-wrapper">
-          <img
-            className="poster"
-            src={`https://image.tmdb.org/t/p/original${img}`}
-            alt="poster"
-          />
-          <button
-            onClick={() => setOpenYT(true)}
-            className="play-wrapper center"
-          >
-            <img src={play} alt="icon" />
-          </button>
-
-          {openYT && (
-            <div className="yt">
-              <YouTube videoId={youTubeKey} />
-            </div>
-          )}
+      <section className="movie-data" data-aos="fade-left">
+        <div className="poster-wrapper" data-aos="zoom-in">
+          <div className="yt" data-aos="zoom-in">
+            <YouTube videoId={`${youTubeKey}?autoplay=2`} />
+          </div>
         </div>
 
         <article className="details flex">

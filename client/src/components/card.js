@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import Imdb from "../icons/imdb.png";
 import RT from "../icons/rotten_tomatoes.png";
-import { useGlobalContext } from "../context";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Card = ({
   id,
@@ -11,6 +13,10 @@ const Card = ({
   vote_average: rating,
   popularity: rtrating,
 }) => {
+  useEffect(() => {
+    AOS.init({ duration: 1000, offset: 180 });
+  }, []);
+
   const months = [
     "Jan",
     "Feb",
@@ -36,7 +42,7 @@ const Card = ({
     }
 
     return (
-      <Link to={`/movies/${id}`} className="card">
+      <Link to={`/movies/${id}`} className="card" data-aos="zoom-in-up">
         <img src={`https://image.tmdb.org/t/p/original${url}`} alt="poster" />
         <div className="wrapper">
           <p className="mobile">{`${months[month]} ${date.split("-")[2]}, ${
@@ -92,7 +98,7 @@ export const SeriesCard = ({
     }
 
     return (
-      <Link to={`/series/${id}`} className="card">
+      <Link to={`/series/${id}`} className="card" data-aos="zoom-in-up">
         <img src={`https://image.tmdb.org/t/p/original${url}`} alt="poster" />
         <div className="wrapper">
           <p className="mobile">{`TV - ${months[month]} ${
@@ -123,7 +129,7 @@ export const PersonCard = ({
   profile_path: url,
 }) => {
   return (
-    <Link to={`/person/${id}`} className="person-card">
+    <Link to={`/person/${id}`} className="person-card" data-aos="zoom-in-up">
       <img src={`https://image.tmdb.org/t/p/original${url}`} alt="poster" />
       <div className="wrapper">
         <h3>{name}</h3>

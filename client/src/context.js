@@ -39,7 +39,7 @@ export const AppProvider = ({ children }) => {
   const [isSearching, setIsSearching] = useState(false);
   const [requestFailed, setRequestFailed] = useState(false);
   const [reload, setReload] = useState(false);
-  const [openYT, setOpenYT] = useState(false);
+  const [openYT, setOpenYT] = useState(true);
 
   /** Movie data */
 

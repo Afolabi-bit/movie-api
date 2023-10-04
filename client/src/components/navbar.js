@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Logo, Cancel, Search } from "./utils";
 import { useGlobalContext } from "../context";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Navbar = () => {
   const { setSearchTerm, searchTerm } = useGlobalContext();
@@ -9,8 +11,12 @@ const Navbar = () => {
     setSearchTerm(searchTerm);
   };
 
+  useEffect(() => {
+    AOS.init({ duration: 1000, offset: 180 });
+  }, []);
+
   return (
-    <nav className="navbar">
+    <nav className="navbar" data-aos="fade-down">
       <div className="container flex-2">
         <Logo />
         <div className="form-wrapper">

@@ -18,7 +18,7 @@ const Home = () => {
         style={{ backgroundImage: `url(${url})` }}
       >
         <Navbar />
-        <Hero movie={nowPlaying[15]} />
+        <Hero />
       </section>
       <Featured />
     </main>

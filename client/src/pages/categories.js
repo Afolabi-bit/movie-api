@@ -1,7 +1,9 @@
 import { Logo } from "../components/utils";
+import { useEffect } from "react";
 import { useGlobalContext } from "../context";
-import { useRef } from "react";
 import Carousel from "../components/Carousel";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import {
   FaArrowUp,
   FaSearchengin,
@@ -22,23 +24,31 @@ const Categories = () => {
     popularTV,
   } = useGlobalContext();
 
+  useEffect(() => {
+    AOS.init({ duration: 1000, offset: 180 });
+  }, []);
+
   return (
     <main className="categories-page">
-      <Logo />
+      <div className="logo-wrapper" data-aos="fade-down">
+        <Logo />
+      </div>
       <section className="categories container">
-        <div className="line"></div>
+        <div className="line" data-aos="fade-right"></div>
 
-        <article className="now-playing">
+        <article className="now-playing" data-aos="fade-right">
           <div className="flex category-title center">
             <h3>Now Playing</h3>
             <FaCirclePlay />
           </div>
           <div className="catalogue">
             <h5>Movies</h5>
-            <Carousel movieList={nowPlaying} type={"movie"} />
+            <div data-aos="fade-left">
+              <Carousel movieList={nowPlaying} type={"movie"} />
+            </div>
           </div>
         </article>
-        <article className="upcoming">
+        <article className="upcoming" data-aos="fade-right">
           <div className="flex category-title center">
             <h3>Upcoming</h3>
             <FaCirclePlay />
@@ -49,7 +59,7 @@ const Categories = () => {
           </div>
         </article>
 
-        <article className="trending">
+        <article className="trending" data-aos="fade-right">
           <div className="flex category-title center">
             <h3>Trending</h3>
             <FaFireFlameCurved />
@@ -69,7 +79,7 @@ const Categories = () => {
           </div>
         </article>
 
-        <article className="discover">
+        <article className="discover" data-aos="fade-right">
           <div className="flex category-title center">
             <h3>Discover</h3>
             <FaSearchengin />
@@ -84,7 +94,7 @@ const Categories = () => {
           </div>
         </article>
 
-        <article className="top-rated">
+        <article className="top-rated" data-aos="fade-right">
           <div className="flex category-title center">
             <h3>Top Rated</h3>
             <FaArrowUp />

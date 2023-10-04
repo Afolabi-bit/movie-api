@@ -1,15 +1,12 @@
 import { useEffect } from "react";
 import { useGlobalContext } from "../context";
 import play from "../icons/Play_poster.png";
-import arrow from "../icons/ExpandArrow.png";
-import rectangle from "../icons/Rectangle.png";
-import Tickets from "../icons/Tickets.png";
-import List from "../icons/List.png";
-import Star from "../icons/Star.png";
 import { Loader } from "../components/utils";
 import { Link, useParams } from "react-router-dom";
 import { Reload } from "../components/utils";
 import YouTube from "react-youtube";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const SeriesData = () => {
   const { setSeriesId, series, loading, requestFailed, openYT, setOpenYT } =
@@ -19,6 +16,10 @@ const SeriesData = () => {
   useEffect(() => {
     setSeriesId(id);
   }, [id]);
+
+  useEffect(() => {
+    AOS.init({ duration: 1000, offset: 180 });
+  }, []);
 
   const {
     poster_path: img,
@@ -57,8 +58,8 @@ const SeriesData = () => {
       }
     });
     return (
-      <section className="series movie-data">
-        <div className="poster-wrapper">
+      <section className="series movie-data" data-aos="fade-left">
+        <div className="poster-wrapper" data-aos="zoom-in">
           <img
             className="poster"
             src={`https://image.tmdb.org/t/p/original${img}`}

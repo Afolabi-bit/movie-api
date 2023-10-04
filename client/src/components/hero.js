@@ -1,33 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { FaImdb, FaRankingStar } from "react-icons/fa6";
 import Play from "../icons/play.png";
-import Imdb from "../icons/imdb.png";
-import RT from "../icons/rotten_tomatoes.png";
 import { useGlobalContext } from "../context";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
-const Hero = ({ movie }) => {
+const Hero = () => {
+  useEffect(() => {
+    AOS.init({ duration: 1000, offset: 180 });
+  }, []);
   const { nowPlaying } = useGlobalContext();
   if (nowPlaying[15]) {
-    let { title, vote_average: rating, popularity, overview } = nowPlaying[15];
+    let {
+      id,
+      title,
+      vote_average: rating,
+      popularity,
+      overview,
+    } = nowPlaying[15];
     return (
-      <section className="hero">
+      <section className="hero" data-aos="fade-up">
         <div className="container">
           <div className="hero-text ">
             <h1>{title}</h1>
             <div className="rating flex">
-              <p className="flex">
-                <img src={Imdb} alt="imdb icon" />
+              <p className="flex imdb">
+                <FaImdb />
                 <span>{rating}/10</span>
               </p>
-              <p className="flex">
-                <img src={RT} alt="rotten tomatoes logo" />
-                <span>{popularity.toFixed(1)}</span>
+              <p className="popularity flex">
+                <FaRankingStar />
+                <span>{popularity.toFixed(2)}</span>
               </p>
             </div>
             <p className="text">{`${overview.substring(0, 200)}...`}</p>
-            <button className="hero-btn center">
+            <Link to={`/movies/${id}`} className="hero-btn center">
               <img src={Play} alt="icon" />
               <span>Watch trailer</span>
-            </button>
+            </Link>
           </div>
         </div>
       </section>
