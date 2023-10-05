@@ -810,36 +810,26 @@ button.search-btn.times {
   position: relative;
   height: 410px;
 }
-
+/*
 .catalogue .carousel::-webkit-scrollbar {
   border-radius: 20px;
   width: 10px;
 }
 
-/* Track */
+/* Track *
 .catalogue .carousel::-webkit-scrollbar-track {
   background-color: #fff;
 }
 
-/* Handle */
+/* Handle *
 .catalogue .carousel::-webkit-scrollbar-thumb {
   background: #ddddddbb;
   border-radius: 20px;
 }
+*/
+
 .catalogue .carousel::-webkit-scrollbar {
-  border-radius: 20px;
-  width: 10px;
-}
-
-/* Track */
-.catalogue .carousel::-webkit-scrollbar-track {
-  background-color: #fff;
-}
-
-/* Handle */
-.catalogue .carousel::-webkit-scrollbar-thumb {
-  background: #ddddddbb;
-  border-radius: 20px;
+  display: none;
 }
 
 .carousel .wrapper {
