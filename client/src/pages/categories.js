@@ -27,7 +27,6 @@ const Categories = () => {
   useEffect(() => {
     AOS.init({ duration: 1000, offset: 100, once: true });
   }, []);
-
   if (
     !topRatedMovies[1] &&
     !topRatedTV[1] &&
@@ -45,7 +44,6 @@ const Categories = () => {
       </main>
     );
   }
-
   return (
     <main className="categories-page">
       <div className="logo-wrapper" data-aos="fade-down">
