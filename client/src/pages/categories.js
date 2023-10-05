@@ -1,5 +1,5 @@
-import { Logo } from "../components/utils";
-import { useEffect } from "react";
+import { Logo, Loader } from "../components/utils";
+import React, { useEffect } from "react";
 import { useGlobalContext } from "../context";
 import Carousel from "../components/Carousel";
 import AOS from "aos";
@@ -25,8 +25,26 @@ const Categories = () => {
   } = useGlobalContext();
 
   useEffect(() => {
-    AOS.init({ duration: 1000, offset: 180 });
+    AOS.init({ duration: 1000, offset: 180, once: true });
   }, []);
+
+  if (
+    !topRatedMovies[1] &&
+    !topRatedTV[1] &&
+    !popularMovies[1] &&
+    !trendingMovies[1] &&
+    !trendingTV[1] &&
+    !trendingPerson[1] &&
+    !nowPlaying &&
+    !upcoming[1] &&
+    !popularTV[1]
+  ) {
+    return (
+      <main className="categories-page">
+        <Loader />
+      </main>
+    );
+  }
 
   return (
     <main className="categories-page">

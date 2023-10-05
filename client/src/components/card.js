@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import Imdb from "../icons/imdb.png";
-import RT from "../icons/rotten_tomatoes.png";
+import { FaImdb, FaRankingStar } from "react-icons/fa6";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -50,12 +49,13 @@ const Card = ({
           }`}</p>
           <h3>{title}</h3>
           <div className="ratings flex-2">
-            <p className="flex">
-              <img className="imdb" src={Imdb} alt="imdb icon" />
+            <p className="flex imdb">
+              <FaImdb />
+
               <span>{rating ? rating.toFixed(1) : rating}/10</span>
             </p>
-            <p className="flex">
-              <img className="rt" src={RT} alt="rotten tomatoes icon" />
+            <p className="flex popularity">
+              <FaRankingStar />
               <span>{rtrating.toFixed(1)}</span>
             </p>
           </div>
@@ -107,11 +107,11 @@ export const SeriesCard = ({
           <h3>{title}</h3>
           <div className="ratings flex-2">
             <p className="flex">
-              <img className="imdb" src={Imdb} alt="imdb icon" />
+              <FaImdb />
               <span>{rating ? rating.toFixed(1) : rating}/10</span>
             </p>
             <p className="flex">
-              <img className="rt" src={RT} alt="rotten tomatoes icon" />
+              <FaRankingStar />
               <span>{rtrating.toFixed(1)}</span>
             </p>
           </div>

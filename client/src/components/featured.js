@@ -10,7 +10,7 @@ import { useGlobalContext } from "../context";
 const Featured = () => {
   const { loading } = useGlobalContext();
   useEffect(() => {
-    AOS.init({ duration: 1000, offset: 180 });
+    AOS.init({ duration: 1000, offset: 180, once: true });
   }, []);
 
   return (

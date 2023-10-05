@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useGlobalContext } from "../context";
 import arrow from "../icons/ExpandArrow.png";
+import play from "../icons/Play_poster.png";
 import rectangle from "../icons/Rectangle.png";
 import Tickets from "../icons/Tickets.png";
 import List from "../icons/List.png";
@@ -63,9 +64,23 @@ const MovieData = () => {
     return (
       <section className="movie-data" data-aos="fade-left">
         <div className="poster-wrapper" data-aos="zoom-in">
-          <div className="yt" data-aos="zoom-in">
-            <YouTube videoId={`${youTubeKey}?autoplay=2`} />
-          </div>
+          <img
+            className="poster"
+            src={`https://image.tmdb.org/t/p/original${img}`}
+            alt="poster"
+          />
+          <button
+            onClick={() => setOpenYT(true)}
+            className="play-wrapper center"
+          >
+            <img src={play} alt="icon" />
+          </button>
+
+          {openYT && (
+            <div className="yt">
+              <YouTube videoId={youTubeKey} />
+            </div>
+          )}
         </div>
 
         <article className="details flex">

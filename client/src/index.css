@@ -325,21 +325,22 @@ button.search-btn.times {
 
 .card .ratings {
   display: inline-flex;
-}
-
-.card .ratings .imdb {
-  width: 35px;
-  height: 17px;
-}
-
-.card .ratings .rt {
-  width: 16px;
-  height: 17px;
+  height: 32px;
 }
 
 .card .ratings p {
   align-items: end;
-  height: 17px;
+}
+
+.card .imdb svg {
+  color: rgb(184, 184, 68);
+  transform: scale(2) translateX(3px);
+  margin-right: 6px;
+}
+
+.card .popularity svg {
+  color: #ff4a4a;
+  transform: scale(1.2);
 }
 
 .card .ratings p span {
@@ -348,7 +349,7 @@ button.search-btn.times {
   font-weight: 400;
   line-height: 12px;
   word-wrap: break-word;
-  margin-left: 15px;
+  margin-left: 10px;
 }
 
 /**************** Movie Page ********************/
@@ -843,7 +844,6 @@ button.search-btn.times {
 
 .carousel .wrapper {
   width: max-content;
-  height: 410px;
   padding: 10px 0px 20px;
   border-radius: 20px;
   gap: 15px;
@@ -1188,10 +1188,8 @@ button.search-btn.times {
   }
 
   .movieList {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
 
   .hero-text {
@@ -1213,8 +1211,14 @@ button.search-btn.times {
     transform: scale(0.7);
   }
 
-  .card {
-    width: calc(100% - 40px);
+  .card > img {
+    height: 270px;
+  }
+
+  .card h3 {
+    color: #111827;
+    font-size: 14px;
+    margin-bottom: 10px;
   }
 
   .sidebar {
