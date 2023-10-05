@@ -1187,6 +1187,10 @@ button.search-btn.times {
     width: 100%;
   }
 
+  .hero-text h1 {
+    margin-bottom: 15px;
+  }
+
   .featured {
     margin: 40px 0;
   }
