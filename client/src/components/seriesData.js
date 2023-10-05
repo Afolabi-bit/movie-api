@@ -3,7 +3,7 @@ import { useGlobalContext } from "../context";
 import play from "../icons/Play_poster.png";
 import { Loader } from "../components/utils";
 import { Link, useParams } from "react-router-dom";
-import { Reload } from "../components/utils";
+import { Reload, MoreMoviesAside } from "../components/utils";
 import YouTube from "react-youtube";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -51,12 +51,12 @@ const SeriesData = () => {
   }
 
   if (Object.keys(series) !== 0 && videos) {
-    console.log(videos.results);
     videos.results.map((video) => {
       if (video.name === "Official Trailer" && video.type === "Trailer") {
         youTubeKey = video.key;
       }
     });
+
     return (
       <section className="series movie-data" data-aos="fade-left">
         <div className="poster-wrapper" data-aos="zoom-in">
@@ -124,48 +124,53 @@ const SeriesData = () => {
               <p>
                 Production Status : <span>{status}</span>
               </p>
-              <div className="genres flex">
-                {genres &&
-                  genres.map((genre, index) => (
-                    <span key={index} className="genre">
-                      {genre.name}
-                    </span>
-                  ))}
-              </div>
+              <p>
+                {`Genres: `}
+                {genres[0] &&
+                  genres.map((genre, index) => {
+                    if (index != genre.length - 1) {
+                      return <span key={index}>{`${genre.name}, `}</span>;
+                    }
+                    return <span key={index}>{genre.name}</span>;
+                  })}
+              </p>
             </div>
           </div>
 
-          <div className="seasons-carousel">
-            <div className="wrapper column">
-              {seasonsList &&
-                seasonsList.map((season) => {
-                  const {
-                    poster_path: url,
-                    name,
-                    overview,
-                    episode_count: episodes,
-                  } = season;
-                  return (
-                    <div key={season.id} className="season-card">
-                      {url ? (
-                        <img
-                          src={`https://image.tmdb.org/t/p/original${url}`}
-                          alt={name}
-                        />
-                      ) : (
-                        <img
-                          src={`https://image.tmdb.org/t/p/original${img}`}
-                          alt={name}
-                        />
-                      )}
-                      <h3>{name}</h3>
-                      <p>Episodes: {episodes}</p>
-                      <p>{overview}</p>
-                    </div>
-                  );
-                })}
+          <aside className="seasons-aside">
+            <h2>Seasons:</h2>
+            <div className="seasons-carousel">
+              <div className="wrapper column">
+                {seasonsList &&
+                  seasonsList.map((season) => {
+                    const {
+                      poster_path: url,
+                      name,
+                      overview,
+                      episode_count: episodes,
+                    } = season;
+                    return (
+                      <div key={season.id} className="season-card">
+                        {url ? (
+                          <img
+                            src={`https://image.tmdb.org/t/p/original${url}`}
+                            alt={name}
+                          />
+                        ) : (
+                          <img
+                            src={`https://image.tmdb.org/t/p/original${img}`}
+                            alt={name}
+                          />
+                        )}
+                        <h3>{`${name}`}</h3>
+                        <p>Episodes: {episodes}</p>
+                        <p>{`${overview.substring(0, 200)}...`}</p>
+                      </div>
+                    );
+                  })}
+              </div>
             </div>
-          </div>
+          </aside>
         </article>
       </section>
     );

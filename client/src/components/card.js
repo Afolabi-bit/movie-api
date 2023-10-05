@@ -3,6 +3,7 @@ import { FaImdb, FaRankingStar } from "react-icons/fa6";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { ReleaseDate } from "./utils";
 
 const Card = ({
   id,
@@ -11,43 +12,23 @@ const Card = ({
   release_date: date,
   vote_average: rating,
   popularity: rtrating,
+  animate,
 }) => {
   useEffect(() => {
     AOS.init({ duration: 1000, offset: 180 });
   }, []);
 
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sept",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  let month;
-
   if (id && url && title && rating && date && rtrating) {
-    const monthCode = date.split("-")[1].split("");
-    if (monthCode[0] < 1) {
-      month = monthCode[1] - 1;
-    } else {
-      month = date.split("-")[1] - 1;
-    }
-
     return (
-      <Link to={`/movies/${id}`} className="card" data-aos="zoom-in-up">
+      <Link
+        to={`/movies/${id}`}
+        className="card"
+        data-aos={animate && "zoom-in-up"}
+      >
         <img src={`https://image.tmdb.org/t/p/original${url}`} alt="poster" />
         <div className="wrapper">
-          <p className="mobile">{`${months[month]} ${date.split("-")[2]}, ${
-            date.split("-")[0]
-          }`}</p>
-          <h3>{title}</h3>
+          <ReleaseDate date={date} type={"short"} />
+          <h3>{title.length > 20 ? `${title.substring(0, 20)}...` : title}</h3>
           <div className="ratings flex-2">
             <p className="flex imdb">
               <FaImdb />

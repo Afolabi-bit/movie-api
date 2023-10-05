@@ -7,7 +7,7 @@ import "aos/dist/aos.css";
 
 const Error = () => {
   useEffect(() => {
-    AOS.init({ duration: 700, offset: 180 });
+    AOS.init({ duration: 700, offset: 20, once: true });
   }, []);
   return (
     <main className="error-page ">

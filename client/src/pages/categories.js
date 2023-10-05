@@ -25,7 +25,7 @@ const Categories = () => {
   } = useGlobalContext();
 
   useEffect(() => {
-    AOS.init({ duration: 1000, offset: 180, once: true });
+    AOS.init({ duration: 1000, offset: 100, once: true });
   }, []);
 
   if (

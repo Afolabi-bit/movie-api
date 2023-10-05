@@ -102,3 +102,53 @@ export const Pagination = () => {
     </div>
   );
 };
+
+export const ReleaseDate = ({ date, type }) => {
+  const monthsShort = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const monthsLong = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  let month;
+  const monthCode = date.split("-")[1].split("");
+  if (monthCode[0] < 1) {
+    month = monthCode[1] - 1;
+  } else {
+    month = date.split("-")[1] - 1;
+  }
+  if (type === "short") {
+    return (
+      <span className="mobile">{`${monthsShort[month]} ${date.split("-")[2]}, ${
+        date.split("-")[0]
+      }`}</span>
+    );
+  }
+  return (
+    <span className="mobile">{`${monthsLong[month]} ${date.split("-")[2]}, ${
+      date.split("-")[0]
+    }`}</span>
+  );
+};

@@ -1,21 +1,25 @@
 import { useEffect } from "react";
 import { useGlobalContext } from "../context";
-import arrow from "../icons/ExpandArrow.png";
 import play from "../icons/Play_poster.png";
-import rectangle from "../icons/Rectangle.png";
-import Tickets from "../icons/Tickets.png";
-import List from "../icons/List.png";
 import Star from "../icons/Star.png";
-import { Loader } from "../components/utils";
+import { Loader, ReleaseDate } from "../components/utils";
 import { useParams } from "react-router-dom";
 import { Reload } from "../components/utils";
+import Card from "./card";
 import YouTube from "react-youtube";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
 const MovieData = () => {
-  const { setMovieId, movie, loading, requestFailed, openYT, setOpenYT } =
-    useGlobalContext();
+  const {
+    setMovieId,
+    movie,
+    loading,
+    requestFailed,
+    openYT,
+    setOpenYT,
+    nowPlaying: movieList,
+  } = useGlobalContext();
   const { id } = useParams();
 
   useEffect(() => {
@@ -23,7 +27,7 @@ const MovieData = () => {
   }, [id]);
 
   useEffect(() => {
-    AOS.init({ duration: 1000, offset: 180 });
+    AOS.init({ duration: 1000, offset: 180, once: true });
   }, []);
 
   const {
@@ -36,7 +40,11 @@ const MovieData = () => {
     genres,
     vote_average: rating,
     videos,
+    popularity,
+    spoken_languages: languages,
+    tagline,
   } = movie;
+
   let min;
   runtime % 60 < 10 ? (min = `0${runtime % 60}`) : (min = runtime % 60);
 
@@ -55,12 +63,12 @@ const MovieData = () => {
   }
 
   if (Object.keys(movie) !== 0 && videos) {
-    console.log(videos.results);
     videos.results.forEach((video) => {
       if (video.type === "Trailer") {
         youTubeKey = video.key;
       }
     });
+
     return (
       <section className="movie-data" data-aos="fade-left">
         <div className="poster-wrapper" data-aos="zoom-in">
@@ -93,55 +101,58 @@ const MovieData = () => {
               <p className="pg">{adult ? "Rated: R" : "PG-13"}</p>
               <p className="dot"></p>
               <p>{`${Math.trunc(runtime / 60)}h ${min}m`}</p>
+              <p className="dot"></p>
+
+              <div className="star flex-3">
+                <img src={Star} alt="icon" />
+                <p>
+                  <span>{rating ? rating.toFixed(1) : rating}</span> |{" "}
+                  {popularity && `${popularity.toFixed(0)}k`}
+                </p>
+              </div>
             </div>
             <p className="overview">{overview}</p>
             <div className="bottom">
               <p>
-                Director : <span> Joseph Kosinski</span>
+                Tagline : <span>{tagline}</span>
               </p>
               <p>
-                Writers : <span>Jim Cash, Jack Epps Jr, Peter Craig</span>
+                Release Date : <ReleaseDate date={date} type={"long"} />
               </p>
               <p>
-                Stars : <span>Tom Cruise, Jennifer Connelly, Miles Teller</span>
+                {`Spoken Languages: `}
+                {languages[0] &&
+                  languages.map((lang, index) => {
+                    if (index != languages.length - 1) {
+                      return (
+                        <span key={index}>{`${lang.english_name}, `}</span>
+                      );
+                    }
+                    return <span key={index}>{lang.english_name}</span>;
+                  })}
               </p>
-              <div className="genres flex">
-                {genres &&
-                  genres.map((genre, index) => (
-                    <span key={index} className="genre">
-                      {genre.name}
-                    </span>
-                  ))}
-              </div>
-              <div className="flex-2">
-                <div className="flex-3">
-                  <button>Top Rated Movie #65</button>
-                  <button>Awards 9 Nominations</button>
-                </div>
-                <img src={arrow} alt="icon" />
-              </div>
+              <p>
+                {`Genres: `}
+                {genres[0] &&
+                  genres.map((genre, index) => {
+                    if (index != genre.length - 1) {
+                      return <span key={index}>{`${genre.name}, `}</span>;
+                    }
+                    return <span key={index}>{genre.name}</span>;
+                  })}
+              </p>
             </div>
           </div>
-
-          <div className="imgs column">
-            <div className="star flex-3">
-              <img src={Star} alt="icon" />
-              <p>
-                <span>{rating ? rating.toFixed(1) : rating}</span> | 350k
-              </p>
-            </div>
-            <div className="btns column">
-              <button className="center">
-                <img src={Tickets} alt="icon" />
-                See Showtimes
-              </button>
-              <button className="center">
-                <img src={List} alt="icon" />
-                More watch options
-              </button>
-            </div>
-            <img src={rectangle} alt="image" />
-          </div>
+          {movieList && (
+            <aside className="more-movies-aside">
+              <h3>More movies for you: </h3>
+              <article className="more-movies" data-aos="zoom-in-down">
+                {movieList.map((movie) => {
+                  return <Card key={movie.id} {...movie} animate={false} />;
+                })}
+              </article>
+            </aside>
+          )}
         </article>
       </section>
     );

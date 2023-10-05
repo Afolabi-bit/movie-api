@@ -48,7 +48,7 @@ const MovieList = () => {
       <>
         <article className="movieList" data-aos="fade-left">
           {movieList.map((movie) => {
-            return <Card key={movie.id} {...movie} />;
+            return <Card key={movie.id} {...movie} animate={true} />;
           })}
         </article>
         <Pagination />
