@@ -793,6 +793,7 @@ button.search-btn.times {
   position: relative;
   height: 410px;
 }
+
 /*
 .catalogue .carousel::-webkit-scrollbar {
   border-radius: 20px;
@@ -837,10 +838,6 @@ button.search-btn.times {
 
 .person-card {
   transition: all 0.3s;
-}
-
-.person-card:hover {
-  transform: scale(1.02);
 }
 
 .catalogue .card > img,

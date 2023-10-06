@@ -34,7 +34,11 @@ const Hero = () => {
                 <span>{popularity.toFixed(2)}</span>
               </p>
             </div>
-            <p className="text">{`${overview.substring(0, 200)}...`}</p>
+            <p className="text">
+              {overview.length < 200
+                ? overview
+                : `${overview.substring(0, 200)}...`}
+            </p>
             <Link to={`/movies/${id}`} className="hero-btn center">
               <img src={Play} alt="icon" />
               <span>Watch trailer</span>
