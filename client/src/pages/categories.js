@@ -59,11 +59,10 @@ const Categories = () => {
           </div>
           <div className="catalogue">
             <h5>Movies</h5>
-            <div data-aos="fade-left">
-              <Carousel movieList={nowPlaying} type={"movie"} />
-            </div>
+            <Carousel movieList={nowPlaying} type={"movie"} />
           </div>
         </article>
+
         <article className="upcoming" data-aos="fade-right">
           <div className="flex category-title center">
             <h3>Upcoming</h3>

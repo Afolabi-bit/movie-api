@@ -10,16 +10,18 @@ const Carousel = ({ movieList, type }) => {
 
   return (
     <div className="carousel " data-aos="fade-left">
-      <div className="wrapper flex">
-        {movieList.map((movie) => {
-          if (type === "movie") {
-            return <Card key={movie.id} {...movie} />;
-          }
-          if (type === "series") {
-            return <SeriesCard key={movie.id} {...movie} />;
-          }
-          return <PersonCard key={movie.id} {...movie} />;
-        })}
+      <div className="overflow">
+        <div className="wrapper flex">
+          {movieList.map((movie) => {
+            if (type === "movie") {
+              return <Card key={movie.id} {...movie} />;
+            }
+            if (type === "series") {
+              return <SeriesCard key={movie.id} {...movie} />;
+            }
+            return <PersonCard key={movie.id} {...movie} />;
+          })}
+        </div>
       </div>
     </div>
   );
