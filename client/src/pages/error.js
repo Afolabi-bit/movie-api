@@ -17,7 +17,7 @@ const Error = () => {
       <div className="flex-2">
         <div className="text" data-aos="fade-right">
           <h1>
-            Oh! Snap, <br /> it looks like we're at a dead end!
+            Oh, Snap! <br /> it looks like we're at a dead end!
           </h1>
           <p>
             Let's go <Link to={"/"}>back home</Link>
