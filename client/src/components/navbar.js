@@ -9,6 +9,10 @@ const Navbar = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSearchTerm(searchTerm);
+    window.scrollTo({
+      top: 650,
+      behavior: "smooth",
+    });
   };
 
   useEffect(() => {
