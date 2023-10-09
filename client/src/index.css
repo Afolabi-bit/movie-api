@@ -1255,6 +1255,10 @@ button.search-btn.times {
     margin-right: 0;
   }
 
+  .categories > article {
+    padding: 30px 10px 20px;
+  }
+
   .error-page {
     height: 100%;
     padding: 60px 20px;

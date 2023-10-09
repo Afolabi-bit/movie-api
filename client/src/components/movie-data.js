@@ -52,7 +52,7 @@ const MovieData = () => {
 
   if (loading) {
     return (
-      <section className="movie-loader center">
+      <section className="movie-loader movie-data center">
         <Loader />
       </section>
     );
