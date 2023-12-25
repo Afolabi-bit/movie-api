@@ -24,7 +24,7 @@ const MovieData = () => {
 
   useEffect(() => {
     setMovieId(id);
-  }, [id]);
+  }, [id, setMovieId]);
 
   useEffect(() => {
     AOS.init({ duration: 1000, offset: 180, once: true });
@@ -123,7 +123,7 @@ const MovieData = () => {
                 {`Spoken Languages: `}
                 {languages[0] &&
                   languages.map((lang, index) => {
-                    if (index != languages.length - 1) {
+                    if (+index !== languages.length - 1) {
                       return (
                         <span key={index}>{`${lang.english_name}, `}</span>
                       );
@@ -135,7 +135,7 @@ const MovieData = () => {
                 {`Genres: `}
                 {genres[0] &&
                   genres.map((genre, index) => {
-                    if (index != genre.length - 1) {
+                    if (+index !== genre.length - 1) {
                       return <span key={index}>{`${genre.name}, `}</span>;
                     }
                     return <span key={index}>{genre.name}</span>;

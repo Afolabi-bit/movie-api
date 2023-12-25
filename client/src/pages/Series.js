@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import Sidebar from "../components/sidebar";
 import SeriesData from "../components/seriesData";
 

@@ -5,12 +5,9 @@ import { FaAngleRight } from "react-icons/fa6";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-import { useGlobalContext } from "../context";
-
 const Featured = () => {
-  const { loading } = useGlobalContext();
   useEffect(() => {
-    AOS.init({ duration: 1000, offset: 180, once: true });
+    AOS.init({ duration: 1000, offset: 30, once: true });
   }, []);
 
   return (

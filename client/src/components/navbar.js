@@ -3,6 +3,7 @@ import { Logo, Cancel, Search } from "./utils";
 import { useGlobalContext } from "../context";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const { setSearchTerm, searchTerm } = useGlobalContext();
@@ -39,10 +40,10 @@ const Navbar = () => {
           {searchTerm && <Cancel />}
         </div>
 
-        <button className="signin center">
+        <Link to={"/signin"} className="signin center">
           <p>Sign in</p>
           <p className="ellipse"></p>
-        </button>
+        </Link>
       </div>
     </nav>
   );

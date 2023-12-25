@@ -28,7 +28,7 @@ const Sidebar = ({ type }) => {
         </Link>
         <Link
           to={"/categories"}
-          className={type == "movie" ? "center active" : "center"}
+          className={type === "movie" ? "center active" : "center"}
           data-aos="zoom-in-left"
           data-aos-duration="21000"
         >
@@ -37,7 +37,7 @@ const Sidebar = ({ type }) => {
         </Link>
         <Link
           to={"/categories"}
-          className={type == "series" ? "center active" : "center"}
+          className={type === "series" ? "center active" : "center"}
           data-aos="zoom-in-left"
           data-aos-duration="21000"
         >

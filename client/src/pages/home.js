@@ -15,7 +15,12 @@ const Home = () => {
     <main>
       <section
         className="hero-wrapper"
-        style={{ backgroundImage: `url(${url})` }}
+        style={{
+          backgroundImage: `url(${url})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "100%",
+          backgroundPosition: "center",
+        }}
       >
         <Navbar />
         <Hero />

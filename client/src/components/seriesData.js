@@ -3,7 +3,7 @@ import { useGlobalContext } from "../context";
 import play from "../icons/Play_poster.png";
 import { Loader } from "../components/utils";
 import { Link, useParams } from "react-router-dom";
-import { Reload, MoreMoviesAside } from "../components/utils";
+import { Reload } from "../components/utils";
 import YouTube from "react-youtube";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -15,7 +15,7 @@ const SeriesData = () => {
 
   useEffect(() => {
     setSeriesId(id);
-  }, [id]);
+  }, [id, setSeriesId]);
 
   useEffect(() => {
     AOS.init({ duration: 1000, offset: 180 });
@@ -27,7 +27,6 @@ const SeriesData = () => {
     overview,
     first_air_date: date,
     genres,
-    vote_average: rating,
     created_by,
     number_of_seasons: seasons,
     number_of_episodes: episodes,
@@ -51,7 +50,7 @@ const SeriesData = () => {
   }
 
   if (Object.keys(series) !== 0 && videos) {
-    videos.results.map((video) => {
+    videos.results.forEach((video) => {
       if (video.name === "Official Trailer" && video.type === "Trailer") {
         youTubeKey = video.key;
       }
@@ -129,7 +128,7 @@ const SeriesData = () => {
                 {`Genres: `}
                 {genres[0] &&
                   genres.map((genre, index) => {
-                    if (index != genre.length - 1) {
+                    if (+index !== genre.length - 1) {
                       return <span key={index}>{`${genre.name}, `}</span>;
                     }
                     return <span key={index}>{genre.name}</span>;

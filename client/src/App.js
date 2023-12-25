@@ -8,6 +8,7 @@ import Movie from "./pages/movie";
 import Error from "./pages/error";
 import Categories from "./pages/categories";
 import Series from "./pages/Series";
+import AuthPage from "./server/auth";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/movies/:id" element={<Movie />}></Route>
         <Route path="/series/:id" element={<Series />}></Route>
         <Route path="/categories" element={<Categories />}></Route>
+        <Route path="/signin" element={<AuthPage />}></Route>
         <Route path="*" element={<Error />}></Route>
       </Routes>
     </Router>

@@ -955,6 +955,132 @@ button.search-btn.times {
   margin-top: 12px;
 }
 
+/* AUTH PAGE STYLING */
+
+.auth-page {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-page .logo-wrapper {
+  width: fit-content;
+  height: fit-content;
+  position: fixed;
+  top: 20px;
+  left: 100px;
+}
+
+.auth-page form {
+  background-color: #fff;
+  width: 380px;
+  height: 420px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 20px 2px #0000001a;
+  padding: 20px;
+}
+
+.auth-page form p {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.auth-page form .form-control {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.auth-page form label {
+  font-size: 15px;
+}
+
+.auth-page form input {
+  width: 100%;
+  border: 2px solid #2c2c2c;
+  border-radius: 5px;
+  padding: 10px 5px;
+}
+
+.auth-page form input:focus {
+  border-color: #7f7ffa;
+}
+
+.auth-page .logo span {
+  color: #000;
+}
+
+.auth-page form a {
+  color: #7f7ffa;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 10px;
+  display: block;
+}
+
+.auth-page h3 {
+  text-align: center;
+  font-weight: 400;
+  transform: translateY(5px);
+}
+
+.auth-page button {
+  padding: 15px 20px;
+  border-radius: 20px;
+  width: 100%;
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  display: block;
+}
+
+.auth-page #sign-in {
+  background-color: rgb(224, 116, 116);
+  color: #fff;
+}
+
+.auth-page #sign-in-with-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-page #sign-in-with-google:hover,
+.auth-page #sign-in-with-google:focus {
+  background-color: rgb(224, 116, 116);
+  color: #fff;
+}
+
+.auth-page button svg {
+  margin-right: 10px;
+}
+
+.auth-page .alert {
+  position: absolute;
+  bottom: 50px;
+  right: -400px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 1px 1px 20px 2px #00000013;
+  width: 350px;
+  height: 70px;
+  padding: 20px;
+}
+
+.auth-page #alert.show {
+  right: 20px;
+}
+
+.auth-page .alert p {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgb(20, 5, 5);
+}
+
 /** Media Queries */
 
 @media screen and (max-width: 1100px) {

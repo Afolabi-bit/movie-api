@@ -6,8 +6,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 const MovieList = () => {
-  const { searchTerm, loading, movieList, requestFailed, pageNo, setPageNo } =
-    useGlobalContext();
+  const { searchTerm, loading, movieList, requestFailed } = useGlobalContext();
 
   useEffect(() => {
     AOS.init({ duration: 1000, offset: 180 });
