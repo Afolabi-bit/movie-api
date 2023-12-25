@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FaImdb, FaRankingStar } from "react-icons/fa6";
+import { FaImdb, FaRankingStar, FaHeart } from "react-icons/fa6";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -15,33 +15,44 @@ const Card = ({
   animate,
 }) => {
   useEffect(() => {
-    AOS.init({ duration: 1000, offset: 180 });
+    AOS.init({ duration: 1000, offset: 30 });
   }, []);
+
+  const addToFavourites = (e) => {
+    e.target.classList.toggle("selected");
+  };
 
   if (id && url && title && rating && date && rtrating) {
     return (
-      <Link
-        to={`/movies/${id}`}
-        className="card"
-        data-aos={animate && "zoom-in-up"}
-      >
-        <img src={`https://image.tmdb.org/t/p/original${url}`} alt="poster" />
-        <div className="wrapper">
-          <ReleaseDate date={date} type={"short"} />
-          <h3>{title.length > 20 ? `${title.substring(0, 20)}...` : title}</h3>
-          <div className="ratings flex-2">
-            <p className="flex imdb">
-              <FaImdb />
+      <div className="card" data-aos={animate && "zoom-in-up"}>
+        <button
+          onClick={(e) => addToFavourites(e)}
+          className="fave-btn"
+          id="fave-btn"
+        >
+          <FaHeart />
+        </button>
+        <Link className="link" to={`/movies/${id}`}>
+          <img src={`https://image.tmdb.org/t/p/original${url}`} alt="poster" />
+          <div className="wrapper">
+            <ReleaseDate date={date} type={"short"} />
+            <h3>
+              {title.length > 20 ? `${title.substring(0, 20)}...` : title}
+            </h3>
+            <div className="ratings flex-2">
+              <p className="flex imdb">
+                <FaImdb />
 
-              <span>{rating ? rating.toFixed(1) : rating}/10</span>
-            </p>
-            <p className="flex popularity">
-              <FaRankingStar />
-              <span>{rtrating.toFixed(1)}</span>
-            </p>
+                <span>{rating ? rating.toFixed(1) : rating}/10</span>
+              </p>
+              <p className="flex popularity">
+                <FaRankingStar />
+                <span>{rtrating.toFixed(1)}</span>
+              </p>
+            </div>
           </div>
-        </div>
-      </Link>
+        </Link>
+      </div>
     );
   }
 };

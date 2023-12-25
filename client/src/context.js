@@ -39,6 +39,8 @@ export const AppProvider = ({ children }) => {
   const [requestFailed, setRequestFailed] = useState(false);
   const [reload, setReload] = useState(false);
   const [openYT, setOpenYT] = useState(true);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
 
   /** Movie data */
 
@@ -260,6 +262,10 @@ export const AppProvider = ({ children }) => {
         setSeriesId,
         openYT,
         setOpenYT,
+        isUserLoggedIn,
+        setIsUserLoggedIn,
+        currentUser,
+        setCurrentUser,
       }}
     >
       {children}

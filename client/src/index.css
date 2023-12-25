@@ -104,8 +104,17 @@ button.search-btn.times {
 .form {
   width: 525px;
   height: 36px;
-  border: 2px solid #fff;
+  border: 2px solid #ffffff80;
   border-radius: 7px;
+  background-color: rgba(255, 255, 255, 0.123);
+}
+
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  .form {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.075);
+  }
 }
 
 .form input {
@@ -146,6 +155,13 @@ button.search-btn.times {
   background-position: center;
   background-repeat: no-repeat;
   margin-left: 10px;
+}
+
+.user-img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  box-shadow: 1px 1px 20px 5px #00000060;
 }
 
 /* Hero section */
@@ -248,6 +264,7 @@ button.search-btn.times {
 }
 
 .movieList {
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
@@ -285,11 +302,15 @@ button.search-btn.times {
 /*********** Card ****/
 
 .card {
+  width: 100%;
+  height: 500px;
   border: 1px solid #f4f4f4;
   box-shadow: 1px 1px 19px 5px #00000013;
   transition: all 0.3s;
   border-radius: 20px;
   background-color: #f5f5f5;
+  position: relative;
+  overflow: hidden;
 }
 
 .card:hover {
@@ -297,7 +318,64 @@ button.search-btn.times {
   transform: scale(1.02);
 }
 
-.card > img {
+.card .fave-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  box-shadow: 1px 1px 20px 3px #00000013;
+  z-index: 10;
+  transition: background-color 0.3s;
+}
+
+.card .fave-btn svg {
+  color: #fff;
+  scale: 1.5;
+  pointer-events: none;
+}
+
+.card .fave-btn.selected svg {
+  color: #c50f28;
+  animation: pop 0.3s;
+}
+
+@keyframes pop {
+  0% {
+    scale: 1.5;
+  }
+  50% {
+    scale: 1.8;
+  }
+  100% {
+    scale: 1.5;
+  }
+}
+
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  .fave-btn {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background-color: hsla(0, 24%, 46%, 0.2);
+  }
+
+  .fave-btn:hover {
+    background-color: hsla(0, 24%, 46%, 0.575);
+  }
+}
+
+.card .link {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.card .link > img {
   width: 100%;
   height: 370px;
   margin-bottom: 10px;
@@ -395,7 +473,7 @@ button.search-btn.times {
 }
 
 .sidebar .links-wrapper a.active {
-  background-color: #f7dee4 !important;
+  background-color: #f7dee47e !important;
   color: #fff !important;
 }
 
@@ -1139,6 +1217,12 @@ button.search-btn.times {
     grid-template-columns: repeat(3, 1fr);
   }
 
+  .card .fave-btn {
+    top: 10px;
+    width: 45px;
+    height: 45px;
+  }
+
   .dynamic-details {
     margin-bottom: 10px;
   }
@@ -1226,7 +1310,11 @@ button.search-btn.times {
     margin-left: 12px;
   }
 
-  .card > img {
+  .card {
+    height: 400px;
+  }
+
+  .card .link > img {
     height: 250px;
   }
 
@@ -1322,6 +1410,11 @@ button.search-btn.times {
     gap: 10px;
   }
 
+  .card .fave-btn {
+    width: 35px;
+    height: 35px;
+  }
+
   .hero-text {
     margin-top: 108px;
     width: 100%;
@@ -1346,7 +1439,11 @@ button.search-btn.times {
     transform: scale(0.7);
   }
 
-  .card > img {
+  .card {
+    height: 320px;
+  }
+
+  .card .link > img {
     height: 200px;
   }
 

@@ -4,6 +4,7 @@ import { Logo } from "../components/utils";
 import { FaGoogle } from "react-icons/fa6";
 import { auth, googleProvider } from "./firebaseConfig";
 import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { useGlobalContext } from "../context";
 
 const AuthPage = () => {
   const [email, setEmail] = useState("");
@@ -12,6 +13,7 @@ const AuthPage = () => {
   const [loggedIn, setLoggedIn] = useState(true);
 
   const navigateTo = useNavigate();
+  const { setIsUserLoggedIn, setCurrentUser } = useGlobalContext();
 
   useEffect(() => {
     document.getElementById("alert").classList.add("show");
@@ -26,6 +28,9 @@ const AuthPage = () => {
   useEffect(() => {
     if (auth?.currentUser?.email) {
       navigateTo("/");
+      setIsUserLoggedIn(true);
+      setCurrentUser(auth.currentUser);
+      console.log(auth.currentUser);
     }
   }, [loggedIn]);
 
