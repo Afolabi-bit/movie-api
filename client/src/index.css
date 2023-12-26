@@ -171,6 +171,17 @@ button.search-btn.times {
   position: relative;
 }
 
+.hero-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(46, 46, 46, 0.226);
+  z-index: 0;
+}
+
 .hero-text {
   margin-top: 78px;
   width: 404px;
