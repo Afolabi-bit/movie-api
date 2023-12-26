@@ -19,7 +19,7 @@ const Home = () => {
           backgroundImage: `url(${url})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "100%",
-          backgroundPosition: "center",
+          backgroundPosition: "top center",
         }}
       >
         <Navbar />

@@ -147,9 +147,11 @@ const MovieData = () => {
             <aside className="more-movies-aside">
               <h3>More movies for you: </h3>
               <article className="more-movies" data-aos="zoom-in-down">
-                {movieList.map((movie) => {
-                  return <Card key={movie.id} {...movie} animate={false} />;
-                })}
+                <div className="wrapper">
+                  {movieList.map((movie) => {
+                    return <Card key={movie.id} {...movie} animate={false} />;
+                  })}
+                </div>
               </article>
             </aside>
           )}

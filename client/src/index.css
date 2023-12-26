@@ -715,7 +715,7 @@ button.search-btn.times {
   margin-top: 10px;
 }
 
-.more-movies,
+.more-movies > .wrapper,
 .seasons-carousel .wrapper {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -723,7 +723,23 @@ button.search-btn.times {
   padding: 10px;
 }
 
-.more-movies .card > img {
+.more-movies .card {
+  height: 280px;
+}
+
+.more-movies .card .fave-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.more-movies .card .fave-btn svg {
+  scale: 1;
+}
+
+.more-movies .card .link > img {
   height: 160px;
 }
 
@@ -733,7 +749,7 @@ button.search-btn.times {
   margin-bottom: 10px;
 }
 
-.more-movies .card svg {
+.more-movies .card .link > svg {
   transform: scale(1.2) translateX(3px);
 }
 
@@ -1260,11 +1276,17 @@ button.search-btn.times {
     padding: 10px;
   }
 
-  .seasons-carousel .wrapper {
+  .seasons-carousel .wrapper,
+  .more-movies > .wrapper {
     width: fit-content;
     display: flex;
     flex-direction: row;
     gap: 10px;
+  }
+
+  .seasons-carousel .wrapper .card,
+  .more-movies .wrapper .card {
+    width: 170px;
   }
 
   .season-card {
