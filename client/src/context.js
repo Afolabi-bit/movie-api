@@ -102,9 +102,9 @@ export const AppProvider = ({ children }) => {
         setRequestFailed(true);
       });
     setLoading(false);
-    if (searchTerm === "") {
-      setIsSearching(!isSearching);
-    }
+    // if (searchTerm === "") {
+    //   setIsSearching(!isSearching);
+    // }
   }, [searchTerm]);
 
   /** On load data */

@@ -11,11 +11,10 @@ import { useGlobalContext } from "../context";
 import Google from "./google.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { MdOutlineCancel } from "react-icons/md";
 import { MdCancelPresentation } from "react-icons/md";
 
 const AuthPage = () => {
-  const { newUser, setNewUser, setCurrentUser } = useGlobalContext();
+  const { newUser, setNewUser } = useGlobalContext();
   const navigateTo = useNavigate();
 
   useEffect(() => {
@@ -94,7 +93,7 @@ const AuthPage = () => {
             </div>
 
             <div className="links">
-              <a href="#">Forgot password?</a>
+              <button>Forgot password?</button>
             </div>
 
             <button id="sign-in">Sign In</button>

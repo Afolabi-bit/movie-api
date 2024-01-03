@@ -21,8 +21,6 @@ const Navbar = () => {
   };
   getUser();
 
-  console.log(currentUser);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setSearchTerm(searchTerm);

@@ -35,8 +35,7 @@ const MovieList = () => {
     return (
       <div className="center no-match" data-aos="fade-up">
         <div>
-          <h2>No movies to display</h2>
-          <p>Please check your internet connection.</p>
+          <Reload />
         </div>
       </div>
     );
