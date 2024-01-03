@@ -1532,7 +1532,7 @@ button.search-btn.times {
   .auth-page form {
     width: 100%;
     align-items: unset;
-    margin-top: 50px;
+    margin-top: 0px;
   }
 
   .auth-page .alert {
