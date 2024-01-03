@@ -44,6 +44,7 @@ export const AppProvider = ({ children }) => {
     email: "",
     password: "",
   });
+  const [signInData, setSignInData] = useState({ email: "", password: "" });
   const [currentUser, setCurrentUser] = useState(null);
 
   /** Movie data */
@@ -270,6 +271,8 @@ export const AppProvider = ({ children }) => {
         setNewUser,
         currentUser,
         setCurrentUser,
+        signInData,
+        setSignInData,
       }}
     >
       {children}

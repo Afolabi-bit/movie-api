@@ -60,10 +60,10 @@ const Sidebar = ({ type }) => {
           <p>50k people are playing now</p>
           <button>Start playing</button>
         </div>
-        <button className="logout">
+        <Link to={"/profile"} className="logout">
           <Logout />
           <span>Log out</span>
-        </button>
+        </Link>
       </div>
     </aside>
   );

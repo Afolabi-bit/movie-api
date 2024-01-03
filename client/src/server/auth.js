@@ -4,6 +4,7 @@ import { Logo } from "../components/utils";
 import { auth, googleProvider } from "./firebaseConfig";
 import {
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   signInWithPopup,
   onAuthStateChanged,
 } from "firebase/auth";
@@ -14,14 +15,14 @@ import "aos/dist/aos.css";
 import { MdCancelPresentation } from "react-icons/md";
 
 const AuthPage = () => {
-  const { newUser, setNewUser } = useGlobalContext();
+  const { newUser, setNewUser, signInData, setSignInData } = useGlobalContext();
   const navigateTo = useNavigate();
 
   useEffect(() => {
     AOS.init({ duration: 700, offset: 20, once: true });
   }, []);
 
-  const [signInForm, setSignInForm] = useState(false);
+  const [signInForm, setSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
 
   const redirect = () => {
@@ -52,9 +53,24 @@ const AuthPage = () => {
     }
   };
 
-  const googleSignUp = async (e) => {
+  const submitSignInForm = async (e) => {
     e.preventDefault();
+    try {
+      await signInWithEmailAndPassword(
+        auth,
+        signInData.email,
+        signInData.password
+      );
+      setSignInData({ username: "", email: "", password: "" });
+      redirect();
+    } catch (error) {
+      setErrorMessage(error.message);
+      showAlert();
+    }
+  };
 
+  const googleAuth = async (e) => {
+    e.preventDefault();
     try {
       await signInWithPopup(auth, googleProvider);
       redirect();
@@ -85,22 +101,37 @@ const AuthPage = () => {
               </button>
             </p>
             <div className="form-control">
-              <input id="email" type="email" placeholder="Enter your email" />
+              <input
+                id="email"
+                type="email"
+                placeholder="Enter your email"
+                autoComplete="off"
+                onChange={(e) =>
+                  setSignInData({ ...signInData, email: e.target.value })
+                }
+              />
             </div>
 
             <div className="form-control">
-              <input id="password" type="password" placeholder="Password" />
+              <input
+                id="password"
+                type="password"
+                placeholder="Password"
+                onChange={(e) =>
+                  setSignInData({ ...signInData, password: e.target.value })
+                }
+              />
             </div>
 
-            <div className="links">
-              <button>Forgot password?</button>
-            </div>
+            <a href="/#">Forgot password?</a>
 
-            <button id="sign-in">Sign In</button>
+            <button id="sign-in" onClick={(e) => submitSignInForm(e)}>
+              Sign In
+            </button>
 
             <h3>or</h3>
 
-            <button id="sign-in-with-google">
+            <button id="sign-in-with-google" onClick={(e) => googleAuth(e)}>
               <img src={Google} alt="google logo" className="google-img" />
               Sign In With Google
             </button>
@@ -163,7 +194,7 @@ const AuthPage = () => {
 
             <h3>or</h3>
 
-            <button id="sign-up-with-google" onClick={(e) => googleSignUp(e)}>
+            <button id="sign-up-with-google" onClick={(e) => googleAuth(e)}>
               <img src={Google} alt="google logo" className="google-img" />
               Sign Up With Google
             </button>
