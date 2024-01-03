@@ -1525,6 +1525,14 @@ button.search-btn.times {
     margin-bottom: 10px;
   }
 
+  .auth-page {
+    height: 100%;
+  }
+
+  .auth-page form {
+    width: 100%;
+  }
+
   .sidebar {
     width: 70px;
     position: fixed;

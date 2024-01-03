@@ -82,7 +82,7 @@ const AuthPage = () => {
 
   return (
     <main className="auth-page">
-      <div className="logo-wrapper" data-aos="fade-down">
+      <div className="logo-wrapper">
         <Logo />
       </div>
 
