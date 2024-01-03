@@ -994,7 +994,8 @@ button.search-btn.times {
   position: relative;
 }
 
-.error-page .logo-wrapper {
+.error-page .logo-wrapper,
+.auth-page .logo-wrapper {
   position: absolute;
   top: 20px;
   left: 100px;
@@ -1072,18 +1073,10 @@ button.search-btn.times {
   align-items: center;
 }
 
-.auth-page .logo-wrapper {
-  width: fit-content;
-  height: fit-content;
-  position: fixed;
-  top: 20px;
-  left: 100px;
-}
-
 .auth-page form {
   background-color: #fff;
   width: 380px;
-  height: 420px;
+  height: 450px;
   border-radius: 10px;
   box-shadow: 1px 1px 20px 2px #0000001a;
   padding: 20px;
@@ -1119,12 +1112,21 @@ button.search-btn.times {
   color: #000;
 }
 
-.auth-page form a {
+.auth-page form .links {
+  display: flex;
+  justify-content: space-between;
+}
+
+.auth-page form a,
+.toggle-form {
   color: #7f7ffa;
   font-size: 12px;
   font-weight: 600;
+  display: inline;
+}
+
+.auth-page form a {
   margin-top: 10px;
-  display: block;
 }
 
 .auth-page h3 {
@@ -1133,7 +1135,7 @@ button.search-btn.times {
   transform: translateY(5px);
 }
 
-.auth-page button {
+.auth-page form div > button {
   padding: 15px 20px;
   border-radius: 20px;
   width: 100%;
@@ -1143,41 +1145,65 @@ button.search-btn.times {
   display: block;
 }
 
+.auth-page .google-img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
 .auth-page #sign-in {
   background-color: rgb(224, 116, 116);
   color: #fff;
 }
 
-.auth-page #sign-in-with-google {
+.auth-page #sign-in-with-google,
+.auth-page #sign-up-with-google {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s;
 }
 
 .auth-page #sign-in-with-google:hover,
-.auth-page #sign-in-with-google:focus {
+.auth-page #sign-in-with-google:focus,
+.auth-page #sign-up-with-google:hover {
   background-color: rgb(224, 116, 116);
   color: #fff;
 }
 
 .auth-page button svg {
   margin-right: 10px;
+  color: rgb(73, 7, 7);
+  transition: scale 0.3s;
+}
+
+.auth-page button svg:hover {
+  scale: 1.7;
 }
 
 .auth-page .alert {
   position: absolute;
-  bottom: 50px;
-  right: -400px;
+  bottom: 100px;
+  right: 30px;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 1px 1px 20px 2px #00000013;
   width: 350px;
   height: 70px;
   padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.5s;
 }
 
-.auth-page #alert.show {
-  right: 20px;
+.auth-page .alert.show {
+  opacity: 1;
+}
+
+.alert svg {
+  scale: 1.5;
 }
 
 .auth-page .alert p {

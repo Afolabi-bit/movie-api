@@ -6,8 +6,7 @@ import "aos/dist/aos.css";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const { setSearchTerm, searchTerm, isUserLoggedIn, currentUser } =
-    useGlobalContext();
+  const { setSearchTerm, searchTerm } = useGlobalContext();
   const handleSubmit = (e) => {
     e.preventDefault();
     setSearchTerm(searchTerm);
@@ -41,21 +40,10 @@ const Navbar = () => {
           {searchTerm && <Cancel />}
         </div>
 
-        {!isUserLoggedIn && (
-          <Link to={"/signin"} className="signin center">
-            <p>Sign in</p>
-            <p className="ellipse"></p>
-          </Link>
-        )}
-        {isUserLoggedIn && (
-          <Link to={"/profile"} className="signin center">
-            {currentUser.photoURL ? (
-              <img className="user-img" src={currentUser.photoURL} />
-            ) : (
-              <img className="user-img" src="../icons/user.png" alt="user" />
-            )}
-          </Link>
-        )}
+        <Link to={"/signin"} className="signin center">
+          <p>Sign in</p>
+          <p className="ellipse"></p>
+        </Link>
       </div>
     </nav>
   );

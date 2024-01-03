@@ -1,4 +1,6 @@
 import React, { useState, useContext, useEffect, createContext } from "react";
+import { auth } from "./server/firebaseConfig";
+import { onAuthStateChanged } from "firebase/auth";
 
 export const AppContext = createContext();
 
@@ -39,7 +41,11 @@ export const AppProvider = ({ children }) => {
   const [requestFailed, setRequestFailed] = useState(false);
   const [reload, setReload] = useState(false);
   const [openYT, setOpenYT] = useState(true);
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [newUser, setNewUser] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
   const [currentUser, setCurrentUser] = useState({});
 
   /** Movie data */
@@ -262,8 +268,8 @@ export const AppProvider = ({ children }) => {
         setSeriesId,
         openYT,
         setOpenYT,
-        isUserLoggedIn,
-        setIsUserLoggedIn,
+        newUser,
+        setNewUser,
         currentUser,
         setCurrentUser,
       }}

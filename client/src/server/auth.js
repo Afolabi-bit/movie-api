@@ -1,60 +1,67 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Logo } from "../components/utils";
-import { FaGoogle } from "react-icons/fa6";
 import { auth, googleProvider } from "./firebaseConfig";
-import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+  onAuthStateChanged,
+} from "firebase/auth";
 import { useGlobalContext } from "../context";
+import Google from "./google.png";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { MdOutlineCancel } from "react-icons/md";
+import { MdCancelPresentation } from "react-icons/md";
 
 const AuthPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loggedIn, setLoggedIn] = useState(true);
-
+  const { newUser, setNewUser, setCurrentUser } = useGlobalContext();
   const navigateTo = useNavigate();
-  const { setIsUserLoggedIn, setCurrentUser } = useGlobalContext();
 
   useEffect(() => {
-    document.getElementById("alert").classList.add("show");
+    AOS.init({ duration: 700, offset: 20, once: true });
+  }, []);
 
-    const removeAlert = setTimeout(() => {
-      document.getElementById("alert").classList.remove("show");
-    }, 3000);
+  const [signInForm, setSignInForm] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-    return clearTimeout(removeAlert);
-  }, [error]);
-
-  useEffect(() => {
-    if (auth?.currentUser?.email) {
-      navigateTo("/");
-      setIsUserLoggedIn(true);
-      setCurrentUser(auth.currentUser);
-      console.log(auth.currentUser);
-    }
-  }, [loggedIn]);
-
-  const submitSigninForm = async (e) => {
-    e.preventDefault();
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      setLoggedIn(!loggedIn);
-    } catch (error) {
-      console.log(error.message);
-      setError(error.message);
-    }
-    document.getElementById("email").value = "";
-    document.getElementById("password").value = "";
+  const redirect = () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigateTo("/");
+      }
+    });
   };
 
-  const signinWithGoogle = async (e) => {
+  const showAlert = () => {
+    document.getElementById("alert").classList.add("show");
+  };
+
+  const submitSignUpForm = async (e) => {
     e.preventDefault();
     try {
-      await signInWithPopup(auth, googleProvider);
-      setLoggedIn(!loggedIn);
+      await createUserWithEmailAndPassword(
+        auth,
+        newUser.email,
+        newUser.password
+      );
+      setNewUser({ username: "", email: "", password: "" });
+      redirect();
     } catch (error) {
-      console.log(error.message);
-      setError(error.message);
+      setErrorMessage(error.message);
+      showAlert();
+    }
+  };
+
+  const googleSignUp = async (e) => {
+    e.preventDefault();
+
+    try {
+      await signInWithPopup(auth, googleProvider);
+      redirect();
+    } catch (error) {
+      setErrorMessage(error.message);
+      showAlert();
     }
   };
 
@@ -64,44 +71,116 @@ const AuthPage = () => {
         <Logo />
       </div>
 
-      <form>
-        <h2>Sign In</h2>
-        <p>Enjoy access to a personalized stream of new movie trailers</p>
-        <div className="form-control">
-          <input
-            id="email"
-            type="email"
-            placeholder="Enter your email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
+      <form data-aos="zoom-in">
+        {signInForm && (
+          <div>
+            <h2>Sign In</h2>
+            <p>
+              Enjoy access to a personalized stream of new movie trailers. Need
+              an account?{" "}
+              <button
+                className="toggle-form"
+                onClick={() => setSignInForm(false)}
+              >
+                Sign Up
+              </button>
+            </p>
+            <div className="form-control">
+              <input id="email" type="email" placeholder="Enter your email" />
+            </div>
 
-        <div className="form-control">
-          <input
-            id="password"
-            type="password"
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+            <div className="form-control">
+              <input id="password" type="password" placeholder="Password" />
+            </div>
 
-        <a href="#">Forgot password?</a>
+            <div className="links">
+              <a href="#">Forgot password?</a>
+            </div>
 
-        <button id="sign-in" onClick={(e) => submitSigninForm(e)}>
-          Sign In
-        </button>
+            <button id="sign-in">Sign In</button>
 
-        <h3>or</h3>
+            <h3>or</h3>
 
-        <button id="sign-in-with-google" onClick={(e) => signinWithGoogle(e)}>
-          <FaGoogle />
-          {/* <img src="google.png" alt="google logo" /> */}
-          Sign In With Google
-        </button>
+            <button id="sign-in-with-google">
+              <img src={Google} alt="google logo" className="google-img" />
+              Sign In With Google
+            </button>
+          </div>
+        )}
+        {!signInForm && (
+          <div>
+            <h2>Sign Up</h2>
+            <p>
+              Enjoy access to a personalized stream of new movie trailers.
+              Already have an account?{" "}
+              <button
+                className="toggle-form"
+                onClick={() => setSignInForm(true)}
+              >
+                Sign In
+              </button>
+            </p>
+            <div className="form-control">
+              <input
+                id="firstname"
+                type="text"
+                placeholder="Enter your username"
+                autoComplete="off"
+                // value={newUser.username}
+                onChange={(e) =>
+                  setNewUser({ ...newUser, username: e.target.value })
+                }
+              />
+            </div>
+            <div className="form-control">
+              <input
+                id="email"
+                type="email"
+                placeholder="Enter your email"
+                autoComplete="off"
+                // value={newUser.email}
+                onChange={(e) =>
+                  setNewUser({ ...newUser, email: e.target.value })
+                }
+              />
+            </div>
+
+            <div className="form-control">
+              <input
+                id="password"
+                type="password"
+                placeholder="Password"
+                autoComplete="off"
+                // value={newUser.password}
+                onChange={(e) =>
+                  setNewUser({ ...newUser, password: e.target.value })
+                }
+              />
+            </div>
+
+            <button id="sign-in" onClick={(e) => submitSignUpForm(e)}>
+              Sign In
+            </button>
+
+            <h3>or</h3>
+
+            <button id="sign-up-with-google" onClick={(e) => googleSignUp(e)}>
+              <img src={Google} alt="google logo" className="google-img" />
+              Sign Up With Google
+            </button>
+          </div>
+        )}
       </form>
 
       <aside className="alert" id="alert">
-        <p>{error.substring(9)}</p>
+        <p>{errorMessage.substring(9)}</p>
+        <button
+          onClick={() => {
+            document.getElementById("alert").classList.remove("show");
+          }}
+        >
+          <MdCancelPresentation />
+        </button>
       </aside>
     </main>
   );
