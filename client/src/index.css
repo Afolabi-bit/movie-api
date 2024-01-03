@@ -1527,19 +1527,19 @@ button.search-btn.times {
 
   .auth-page {
     min-height: 100vh;
+    display: block;
   }
 
   .auth-page form {
     width: 100%;
-    align-items: unset;
-    margin-top: 0px;
+    margin-top: 90px;
   }
 
   .auth-page .alert {
     left: 50%;
     transform: translateX(-50%);
     right: 0;
-    top: 670px;
+    top: 560px;
     width: calc(100% - 40px);
   }
 
