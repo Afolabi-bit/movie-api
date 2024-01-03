@@ -1,6 +1,4 @@
 import React, { useState, useContext, useEffect, createContext } from "react";
-import { auth } from "./server/firebaseConfig";
-import { onAuthStateChanged } from "firebase/auth";
 
 export const AppContext = createContext();
 
@@ -46,7 +44,7 @@ export const AppProvider = ({ children }) => {
     email: "",
     password: "",
   });
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState(null);
 
   /** Movie data */
 

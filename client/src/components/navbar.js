@@ -4,9 +4,25 @@ import { useGlobalContext } from "../context";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { Link } from "react-router-dom";
+import UserImg from "../icons/user.png";
+import { auth } from "../server/firebaseConfig";
+import { onAuthStateChanged } from "firebase/auth";
 
 const Navbar = () => {
-  const { setSearchTerm, searchTerm } = useGlobalContext();
+  const { setSearchTerm, searchTerm, currentUser, setCurrentUser } =
+    useGlobalContext();
+
+  const getUser = () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setCurrentUser(user);
+      }
+    });
+  };
+  getUser();
+
+  console.log(currentUser);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setSearchTerm(searchTerm);
@@ -40,10 +56,21 @@ const Navbar = () => {
           {searchTerm && <Cancel />}
         </div>
 
-        <Link to={"/signin"} className="signin center">
-          <p>Sign in</p>
-          <p className="ellipse"></p>
-        </Link>
+        {currentUser && (
+          <Link to={"/profile"} className="profile-pic center">
+            {currentUser.photoURL && (
+              <img src={currentUser.photoURL} alt="icon" />
+            )}
+            {!currentUser.photoURL && <img src={UserImg} alt="icon" />}
+          </Link>
+        )}
+
+        {!currentUser && (
+          <Link to={"/signin"} className="signin center">
+            <p>Sign in</p>
+            <p className="ellipse"></p>
+          </Link>
+        )}
       </div>
     </nav>
   );
