@@ -1494,12 +1494,12 @@ button.search-btn.times {
   }
 
   .categories-page .logo-wrapper .btn-wrapper {
-    gap: 10px;
+    gap: 7px;
     flex-wrap: wrap;
   }
 
   .categories-page .logo-wrapper button {
-    padding: 9px 25px;
+    padding: 9px 20px;
     font-size: 10px;
   }
 }
