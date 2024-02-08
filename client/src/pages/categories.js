@@ -52,9 +52,10 @@ const Categories = () => {
             Popular Movies
           </button>
           <button onClick={(e) => selectTarget(e)}>Top Rated</button>
+          <button onClick={(e) => selectTarget(e)}>Trending</button>
+
           <button onClick={(e) => selectTarget(e)}>Now Playing</button>
 
-          <button onClick={(e) => selectTarget(e)}>Trending</button>
           <button onClick={(e) => selectTarget(e)}>Upcoming</button>
         </div>
       </div>

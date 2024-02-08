@@ -17,9 +17,6 @@ const Home = () => {
         className="hero-wrapper"
         style={{
           backgroundImage: `url(${url})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "100%",
-          backgroundPosition: "top center",
         }}
       >
         <Navbar />

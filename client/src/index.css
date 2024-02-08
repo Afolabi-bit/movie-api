@@ -182,6 +182,9 @@ button.search-btn.times {
   min-height: 600px;
   color: #fff;
   position: relative;
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .hero-wrapper::before {
@@ -709,8 +712,7 @@ button.search-btn.times {
   font-weight: 500;
 }
 
-.more-movies-aside > h3,
-.seasons-aside h2 {
+.more-movies-aside > h3 {
   color: #333333;
   text-align: center;
   font-family: "DM Sans", sans-serif;
@@ -718,15 +720,6 @@ button.search-btn.times {
   margin-top: 10px;
 }
 
-.seasons-aside h2 {
-  margin-bottom: 10px;
-}
-
-.seasons-aside {
-  width: 360px;
-}
-
-.seasons-carousel,
 .more-movies {
   width: 360px;
   height: 420px;
@@ -739,8 +732,7 @@ button.search-btn.times {
   margin-top: 10px;
 }
 
-.more-movies > .wrapper,
-.seasons-carousel .wrapper {
+.more-movies > .wrapper {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
@@ -1509,12 +1501,6 @@ button.search-btn.times {
   .categories-page .logo-wrapper button {
     padding: 9px 25px;
     font-size: 10px;
-  }
-}
-
-@media screen and (max-width: 330px) {
-  .season-card {
-    width: 160px;
   }
 }
 
