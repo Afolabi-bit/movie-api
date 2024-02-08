@@ -420,7 +420,7 @@ button.search-btn.times {
 
 .card h3 {
   color: #111827;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 700;
   word-wrap: break-word;
   margin-bottom: 10px;
@@ -782,20 +782,6 @@ button.search-btn.times {
   display: none;
 }
 
-/* Track *
-.seasons-carousel::-webkit-scrollbar-track,
-.more-movies::-webkit-scrollbar {
-  background: #eeeeee79;
-  background-color: #fff;
-}
-
-/* Handle *
-.seasons-carousel::-webkit-scrollbar-thumb,
-.more-movies::-webkit-scrollbar {
-  background: #fff;
-  background: #ddddddbb;
-  border-radius: 20px;
-} */
 .seasons-carousel .wrapper {
   width: 100%;
   gap: 10px;
@@ -808,50 +794,49 @@ button.search-btn.times {
   padding-bottom: 10px;
 }
 
-.season-card img {
-  width: 100%;
-  height: 280px;
-  object-fit: cover;
-  object-position: center top;
-  border-radius: 10px;
-}
-
-.season-card .text {
-  padding: 0 10px;
-}
-
-.season-card h3 {
-  font-size: 14px;
-  color: #666;
-}
-
-.season-card > p:first-of-type {
-  font-size: 12px;
-  color: #333;
-  margin-bottom: 7px;
-}
-
-.season-card > p:last-of-type {
-  font-size: 10px;
-  color: #333;
-}
-
 /********* Categories Page *******/
 .categories-page {
   position: relative;
   width: 100%;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .categories-page .logo-wrapper {
-  position: absolute;
-  top: 20px;
-  left: 98px;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  padding: 20px 98px;
   z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-shadow: 0 1px 17px 0 #8b8b8b3b;
+  background-color: #f5f5f5;
 }
 
 .categories-page .logo span {
   color: #000;
+}
+
+.categories-page .logo-wrapper .btn-wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.categories-page .logo-wrapper button {
+  background: #ecebeb;
+  padding: 9px 25px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.categories-page .logo-wrapper button.active {
+  background-color: #be123c;
+  color: #fff;
 }
 
 .categories-page section {
@@ -859,81 +844,7 @@ button.search-btn.times {
   position: relative;
   width: 100%;
   min-height: 100vh;
-  padding-top: 80px;
-}
-
-.categories > article {
-  box-shadow: 1px 1px 15px 2px #66666627;
-  padding: 40px 20px 20px;
-  margin: 40px 0;
-  border-radius: 20px;
-}
-
-.line {
-  width: 100%;
-  height: 2px;
-  background-color: #be123c;
-}
-
-.categories .category-title {
-  display: inline-flex;
-  color: #be123c;
-}
-
-.top-rated {
-  padding-top: 40px;
-}
-
-.categories-page h3 {
-  font-size: 25px;
-  margin-right: 10px;
-}
-
-.categories-page svg {
-  width: 25px;
-  height: 25px;
-}
-
-.catalogue {
-  margin: 20px 0 40px;
-}
-
-.catalogue h5 {
-  color: #333333;
-  font-size: 20px;
-}
-
-.catalogue .carousel {
-  overflow: hidden;
-  border-radius: 20px;
-  background: url("./icons/bg-pattern.jpg");
-  background-position: 0% -600%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-  height: 420px;
-  padding: 10px;
-  overflow: hidden;
-}
-
-.carousel .overflow {
-  overflow-x: scroll;
-  border-radius: 20px;
-}
-
-.catalogue .carousel .overflow::-webkit-scrollbar,
-.seasons-carousel::-webkit-scrollbar,
-.more-movies::-webkit-scrollbar {
-  display: none;
-}
-
-.carousel .wrapper {
-  width: max-content;
-  padding: 10px 0px 20px;
-  border-radius: 20px;
-  gap: 0 15px;
-  left: 0;
-  top: 0;
+  padding-top: 120px;
 }
 
 .catalogue a.card {
@@ -945,56 +856,8 @@ button.search-btn.times {
   border: none;
 }
 
-.person-card {
-  transition: all 0.3s;
-}
-
-.catalogue .card > img,
-.person-card img {
-  border-radius: 10px;
-  width: 100%;
-  height: 270px;
-}
-
-.catalogue .card .wrapper {
-  padding: 0 10px 10px;
-  width: 100%;
-}
-
-.person-card .wrapper {
-  padding: 20px 10px 10px;
-}
-
 .card .mobile {
   margin: 0;
-}
-
-.catalogue .card h3 {
-  font-size: 14px;
-  font-weight: 700;
-  margin-bottom: 10px;
-  word-wrap: break-word;
-}
-
-.person-card h3 {
-  font-size: 14px;
-  font-weight: 700;
-  margin-bottom: 5px;
-}
-
-.person-card p {
-  color: #9ca3af;
-  font-size: 12px;
-  font-weight: 700;
-  word-wrap: break-word;
-}
-
-.catalogue .card .ratings {
-  display: none;
-}
-
-.person-card {
-  color: #000;
 }
 
 /*******  Error Page *******/
@@ -1364,6 +1227,23 @@ button.search-btn.times {
   .error-page .img img {
     width: 320px;
   }
+
+  .categories-page .logo-wrapper {
+    padding: 20px 50px;
+  }
+
+  .categories-page .logo-wrapper .btn-wrapper {
+    gap: 6px;
+  }
+
+  .categories-page .logo-wrapper button {
+    background: #ecebeb;
+    padding: 9px 20px;
+    border-radius: 50px;
+    font-size: 10px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
 }
 
 @media screen and (max-width: 850px) {
@@ -1414,6 +1294,18 @@ button.search-btn.times {
   .movie-data {
     width: calc(100% - 100px);
     margin-top: 10px;
+  }
+
+  .categories-page .logo-wrapper {
+    padding: 20px;
+  }
+
+  .categories-page .logo-wrapper .btn-wrapper {
+    gap: 6px;
+  }
+
+  .categories-page .logo-wrapper button {
+    padding: 9px 14px;
   }
 }
 
@@ -1600,13 +1492,23 @@ button.search-btn.times {
     margin: 0;
   }
 
-  .categories-page .logo-wrapper,
-  .error-page .logo-wrapper {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    height: fit-content;
-    margin: 0;
+  .categories-page section {
+    padding-top: 200px;
+  }
+
+  .categories-page .logo-wrapper {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .categories-page .logo-wrapper .btn-wrapper {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .categories-page .logo-wrapper button {
+    padding: 9px 25px;
+    font-size: 10px;
   }
 }
 

@@ -4,6 +4,7 @@ import { Loader, Reload, Pagination } from "../components/utils";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import MovieGrid from "./MovieGrid";
 
 const MovieList = () => {
   const { searchTerm, loading, movieList, requestFailed } = useGlobalContext();
@@ -42,13 +43,10 @@ const MovieList = () => {
   }
 
   if (movieList.length > 0) {
+    console.log(movieList);
     return (
       <>
-        <article className="movieList" data-aos="fade-left">
-          {movieList.map((movie) => {
-            return <Card key={movie.id} {...movie} animate={true} />;
-          })}
-        </article>
+        <MovieGrid movieList={movieList} />
         <Pagination />
       </>
     );

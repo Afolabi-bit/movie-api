@@ -5,15 +5,18 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { ReleaseDate } from "./utils";
 
-const Card = ({
-  id,
-  poster_path: url,
-  title,
-  release_date: date,
-  vote_average: rating,
-  popularity: rtrating,
-  animate,
-}) => {
+const Card = ({ movie }) => {
+  // console.log(movie);
+  const {
+    id,
+    poster_path: url,
+    title,
+    release_date: date,
+    vote_average: rating,
+    popularity: rtrating,
+    animate,
+  } = movie;
+
   useEffect(() => {
     AOS.init({ duration: 1000, offset: 30 });
   }, []);
@@ -37,7 +40,7 @@ const Card = ({
           <div className="wrapper">
             <ReleaseDate date={date} type={"short"} />
             <h3>
-              {title.length > 20 ? `${title.substring(0, 20)}...` : title}
+              {title.length > 28 ? `${title.substring(0, 28)}...` : title}
             </h3>
             <div className="ratings flex-2">
               <p className="flex imdb">
@@ -57,14 +60,16 @@ const Card = ({
   }
 };
 
-export const SeriesCard = ({
-  id,
-  poster_path: url,
-  first_air_date: date,
-  name: title,
-  vote_average: rating,
-  popularity: rtrating,
-}) => {
+export const SeriesCard = ({ movie }) => {
+  const {
+    id,
+    poster_path: url,
+    first_air_date: date,
+    name: title,
+    vote_average: rating,
+    popularity: rtrating,
+  } = movie;
+
   const months = [
     "Jan",
     "Feb",
@@ -79,6 +84,7 @@ export const SeriesCard = ({
     "Nov",
     "Dec",
   ];
+
   let month;
 
   if (id && url && title && rating && date && rtrating) {

@@ -1,4 +1,10 @@
-import React, { useState, useContext, useEffect, createContext } from "react";
+import React, {
+  useState,
+  useContext,
+  useEffect,
+  createContext,
+  useCallback,
+} from "react";
 
 export const AppContext = createContext();
 
@@ -154,8 +160,7 @@ export const AppProvider = ({ children }) => {
   }, []);
 
   /** Popular Movies */
-
-  useEffect(() => {
+  const getpopularMovies = useCallback(() => {
     fetch(`${popularMoviesUrl}${apiKey}&page=${pageNo}`)
       .then((res) => res.json())
       .then((data) => {
@@ -166,9 +171,11 @@ export const AppProvider = ({ children }) => {
       });
   }, []);
 
+  useEffect(getpopularMovies, []);
+
   /** POpular Series */
 
-  useEffect(() => {
+  const getpopularSeries = useCallback(() => {
     fetch(`${popularTVUrl}${apiKey}&page=${pageNo}`)
       .then((res) => res.json())
       .then((data) => {
@@ -178,6 +185,7 @@ export const AppProvider = ({ children }) => {
         console.log(err);
       });
   }, []);
+  useEffect(getpopularSeries, []);
 
   /** Trending Today */
 
