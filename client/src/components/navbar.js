@@ -4,7 +4,6 @@ import { useGlobalContext } from "../context";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { Link } from "react-router-dom";
-import UserImg from "../icons/user.png";
 import { auth } from "../server/firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -59,7 +58,12 @@ const Navbar = () => {
             {currentUser.photoURL && (
               <img src={currentUser.photoURL} alt="icon" />
             )}
-            {!currentUser.photoURL && <img src={UserImg} alt="icon" />}
+            {!currentUser.photoURL && (
+              <img
+                src="https://res.cloudinary.com/dkpoealta/image/upload/v1707479803/user_yposbw.png"
+                alt=""
+              />
+            )}
           </Link>
         )}
 

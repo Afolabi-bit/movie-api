@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Logo } from "../components/utils";
-import { auth, googleProvider } from "./firebaseConfig";
+import { auth, googleProvider, db } from "./firebaseConfig";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -12,7 +12,10 @@ import { useGlobalContext } from "../context";
 import Google from "./google.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { MdCancelPresentation } from "react-icons/md";
+import dbFunc from "./dataBase";
+
+// A call to the db function
+const { getUsers } = dbFunc();
 
 const AuthPage = () => {
   const { newUser, setNewUser, signInData, setSignInData } = useGlobalContext();
@@ -25,6 +28,7 @@ const AuthPage = () => {
   const [signInForm, setSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
 
+  // Redirect to homepage
   const redirect = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -33,10 +37,12 @@ const AuthPage = () => {
     });
   };
 
+  // Error alerts
   const showAlert = () => {
     document.getElementById("alert").classList.add("show");
   };
 
+  //
   const submitSignUpForm = async (e) => {
     e.preventDefault();
     try {
@@ -53,6 +59,7 @@ const AuthPage = () => {
     }
   };
 
+  //
   const submitSignInForm = async (e) => {
     e.preventDefault();
     try {
@@ -69,6 +76,7 @@ const AuthPage = () => {
     }
   };
 
+  // Used for signup and signin
   const googleAuth = async (e) => {
     e.preventDefault();
     try {
@@ -189,7 +197,7 @@ const AuthPage = () => {
             </div>
 
             <button id="sign-in" onClick={(e) => submitSignUpForm(e)}>
-              Sign In
+              Sign Up
             </button>
 
             <h3>or</h3>
@@ -208,9 +216,7 @@ const AuthPage = () => {
           onClick={() => {
             document.getElementById("alert").classList.remove("show");
           }}
-        >
-          <MdCancelPresentation />
-        </button>
+        ></button>
       </aside>
     </main>
   );

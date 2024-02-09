@@ -1035,8 +1035,8 @@ button.search-btn.times {
 .auth-page #sign-in-with-google:hover,
 .auth-page #sign-in-with-google:focus,
 .auth-page #sign-up-with-google:hover {
-  background-color: rgb(224, 116, 116);
-  color: #fff;
+  background-color: #eee;
+  box-shadow: 0 1px 3px 0 #ddd;
 }
 
 .auth-page button svg {
