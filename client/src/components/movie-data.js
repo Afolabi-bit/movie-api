@@ -12,6 +12,7 @@ import "aos/dist/aos.css";
 
 const MovieData = () => {
   const {
+    movieId,
     setMovieId,
     movie,
     loading,
@@ -20,37 +21,20 @@ const MovieData = () => {
     setOpenYT,
     nowPlaying: movieList,
   } = useGlobalContext();
+
   const { id } = useParams();
 
   useEffect(() => {
     setMovieId(id);
-  }, [id, setMovieId]);
+  }, [id]);
 
   useEffect(() => {
     AOS.init({ duration: 1000, offset: 180, once: true });
   }, []);
 
-  const {
-    adult,
-    poster_path: img,
-    title,
-    overview,
-    release_date: date,
-    runtime,
-    genres,
-    vote_average: rating,
-    videos,
-    popularity,
-    spoken_languages: languages,
-    tagline,
-  } = movie;
-
-  let min;
-  runtime % 60 < 10 ? (min = `0${runtime % 60}`) : (min = runtime % 60);
-
   let youTubeKey;
 
-  if (loading) {
+  if (loading || Object.keys(movie).length == 0) {
     return (
       <section className="movie-loader movie-data center">
         <Loader />
@@ -62,33 +46,39 @@ const MovieData = () => {
     return <Reload />;
   }
 
-  if (Object.keys(movie) !== 0 && videos) {
-    videos.results.forEach((video) => {
-      if (video.type === "Trailer") {
-        youTubeKey = video.key;
-      }
-    });
+  if (Object.keys(movie).length > 0) {
+    const {
+      adult,
+      poster_path: img,
+      title,
+      overview,
+      release_date: date,
+      runtime,
+      genres,
+      vote_average: rating,
+      videos,
+      popularity,
+      spoken_languages: languages,
+      tagline,
+    } = movie;
+
+    let min;
+    runtime % 60 < 10 ? (min = `0${runtime % 60}`) : (min = runtime % 60);
+
+    if (Object.keys(movie).length !== 0 && videos) {
+      videos.results.forEach((video) => {
+        if (video.type === "Trailer") {
+          youTubeKey = video.key;
+        }
+      });
+    }
 
     return (
-      <section className="movie-data" data-aos="fade-left">
-        <div className="poster-wrapper" data-aos="zoom-in">
-          <img
-            className="poster"
-            src={`https://image.tmdb.org/t/p/original${img}`}
-            alt="poster"
-          />
-          <button
-            onClick={() => setOpenYT(true)}
-            className="play-wrapper center"
-          >
-            <img src={play} alt="icon" />
-          </button>
-
-          {openYT && (
-            <div className="yt">
-              <YouTube videoId={youTubeKey} />
-            </div>
-          )}
+      <section className="movie-data">
+        <div className="poster-wrapper">
+          <div className="yt">
+            <YouTube videoId={youTubeKey} />
+          </div>
         </div>
 
         <article className="details flex">
@@ -149,7 +139,7 @@ const MovieData = () => {
               <article className="more-movies" data-aos="zoom-in-down">
                 <div className="wrapper">
                   {movieList.map((movie) => {
-                    return <Card key={movie.id} {...movie} animate={false} />;
+                    return <Card key={movie.id} data={movie} animate={false} />;
                   })}
                 </div>
               </article>

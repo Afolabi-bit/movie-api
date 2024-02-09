@@ -43,7 +43,6 @@ const MovieList = () => {
   }
 
   if (movieList.length > 0) {
-    console.log(movieList);
     return (
       <>
         <MovieGrid movieList={movieList} />

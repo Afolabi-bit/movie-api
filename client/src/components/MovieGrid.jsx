@@ -11,7 +11,7 @@ const MovieGrid = ({ movieList }) => {
   return (
     <article className="movieList" data-aos="zoom-out">
       {movieList.map((movie) => {
-        return <Card key={movie.id} movie={movie} animate={true} />;
+        return <Card key={movie.id} data={movie} animate={true} />;
       })}
     </article>
   );
