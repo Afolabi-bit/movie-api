@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useGlobalContext } from "../context";
-import play from "../icons/Play_poster.png";
 import Star from "../icons/Star.png";
 import { Loader, ReleaseDate } from "../components/utils";
 import { useParams } from "react-router-dom";
@@ -12,13 +11,10 @@ import "aos/dist/aos.css";
 
 const MovieData = () => {
   const {
-    movieId,
     setMovieId,
     movie,
     loading,
     requestFailed,
-    openYT,
-    setOpenYT,
     nowPlaying: movieList,
   } = useGlobalContext();
 
@@ -26,7 +22,7 @@ const MovieData = () => {
 
   useEffect(() => {
     setMovieId(id);
-  }, [id]);
+  });
 
   useEffect(() => {
     AOS.init({ duration: 1000, offset: 180, once: true });
@@ -34,7 +30,7 @@ const MovieData = () => {
 
   let youTubeKey;
 
-  if (loading || Object.keys(movie).length == 0) {
+  if (loading || Object.keys(movie).length === 0) {
     return (
       <section className="movie-loader movie-data center">
         <Loader />
@@ -49,7 +45,6 @@ const MovieData = () => {
   if (Object.keys(movie).length > 0) {
     const {
       adult,
-      poster_path: img,
       title,
       overview,
       release_date: date,

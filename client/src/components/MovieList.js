@@ -1,4 +1,3 @@
-import Card from "./card";
 import { useGlobalContext } from "../context";
 import { Loader, Reload, Pagination } from "../components/utils";
 import { useEffect } from "react";

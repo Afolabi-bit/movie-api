@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { Logo } from "./utils";
-import { FaHome } from "react-icons/fa";
-import { ImVideoCamera as Projector } from "react-icons/im";
-import { FaTv, FaCalendarDays as Calendar } from "react-icons/fa6";
-import { GrLogout as Logout } from "react-icons/gr";
+import { IoHomeOutline } from "react-icons/io5";
+import { BiCategoryAlt } from "react-icons/bi";
+import { FaRegHeart } from "react-icons/fa";
+import { IoLogOutOutline } from "react-icons/io5";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -23,7 +23,7 @@ const Sidebar = ({ type }) => {
           data-aos="zoom-in-left"
           data-aos-duration="21000"
         >
-          <FaHome />
+          <IoHomeOutline />
           <span>Home</span>
         </Link>
         <Link
@@ -32,17 +32,8 @@ const Sidebar = ({ type }) => {
           data-aos="zoom-in-left"
           data-aos-duration="21000"
         >
-          <Projector />
-          <span>Movies</span>
-        </Link>
-        <Link
-          to={"/categories"}
-          className={type === "series" ? "center active" : "center"}
-          data-aos="zoom-in-left"
-          data-aos-duration="21000"
-        >
-          <FaTv />
-          <span>TV Series</span>
+          <BiCategoryAlt />
+          <span>Categories</span>
         </Link>
         <Link
           to={"/categories"}
@@ -50,8 +41,8 @@ const Sidebar = ({ type }) => {
           data-aos="zoom-in-left"
           data-aos-duration="21000"
         >
-          <Calendar />
-          <span>Upcoming</span>
+          <FaRegHeart />
+          <span>Favourites</span>
         </Link>
       </div>
       <div className="text">
@@ -60,11 +51,11 @@ const Sidebar = ({ type }) => {
           <p>50k people are playing now</p>
           <button>Start playing</button>
         </div>
-        <Link to={"/profile"} className="logout">
-          <Logout />
-          <span>Log out</span>
-        </Link>
       </div>
+      <Link to={"/profile"} className="logout">
+        <IoLogOutOutline />
+        <span>Log out</span>
+      </Link>
     </aside>
   );
 };

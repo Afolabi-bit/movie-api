@@ -113,7 +113,7 @@ export const AppProvider = ({ children }) => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [pageNo]);
 
   /** Popular Movies */
   const getpopularMovies = useCallback(() => {
@@ -125,9 +125,9 @@ export const AppProvider = ({ children }) => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [pageNo]);
 
-  useEffect(getpopularMovies, []);
+  useEffect(getpopularMovies);
 
   /** Trending Today */
 
@@ -140,7 +140,7 @@ export const AppProvider = ({ children }) => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [pageNo]);
 
   /** Now Playing */
   useEffect(() => {
@@ -152,7 +152,7 @@ export const AppProvider = ({ children }) => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [pageNo]);
 
   /** Upcoming */
   useEffect(() => {
@@ -164,7 +164,7 @@ export const AppProvider = ({ children }) => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [pageNo]);
 
   return (
     <AppContext.Provider

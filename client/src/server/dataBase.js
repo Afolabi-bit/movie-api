@@ -1,14 +1,13 @@
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "./firebaseConfig";
-import { useGlobalContext } from "../context";
 
 const dbFunc = () => {
-  const collectionRef = collection(db, "users");
+  const favouritesCollectionRef = collection(db, "favourites");
 
   //   Function to get users from the database
-  const getUsers = async () => {
+  const getFavourites = async () => {
     try {
-      const data = await getDocs(collectionRef);
+      const data = await getDocs(favouritesCollectionRef);
       const filteredData = data.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
@@ -19,7 +18,23 @@ const dbFunc = () => {
     }
   };
 
-  return { getUsers };
+  const addFavourite = async (arg) => {
+    try {
+      await addDoc(favouritesCollectionRef, {
+        id: arg.id,
+        date: arg.date,
+        popularity: arg.popularity,
+        poster: arg.url,
+        rating: arg.rating,
+        title: arg.title,
+        uid: arg.uid,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return { getFavourites, addFavourite };
 };
 
 export default dbFunc;

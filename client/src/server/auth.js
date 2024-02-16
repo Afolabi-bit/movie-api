@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Logo } from "../components/utils";
-import { auth, googleProvider, db } from "./firebaseConfig";
+import { auth, googleProvider } from "./firebaseConfig";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -12,10 +12,6 @@ import { useGlobalContext } from "../context";
 import Google from "./google.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import dbFunc from "./dataBase";
-
-// A call to the db function
-const { getUsers } = dbFunc();
 
 const AuthPage = () => {
   const { newUser, setNewUser, signInData, setSignInData } = useGlobalContext();

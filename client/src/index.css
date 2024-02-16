@@ -182,7 +182,7 @@ button.search-btn.times {
   min-height: 600px;
   color: #fff;
   position: relative;
-  background-position: top center;
+  background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -483,6 +483,8 @@ button.search-btn.times {
 .sidebar a {
   height: 86px;
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .sidebar a.active::after {
@@ -496,7 +498,7 @@ button.search-btn.times {
 }
 
 .sidebar .links-wrapper a.center:hover {
-  background-color: #be123d1c;
+  background-color: #e7e7e7ad;
 }
 
 .sidebar .links-wrapper a.active {
@@ -505,8 +507,8 @@ button.search-btn.times {
 }
 
 .sidebar a svg {
+  font-size: 26px;
   color: #666666;
-  transform: scale(1.5);
   transition: all 0.3s;
 }
 
@@ -574,8 +576,7 @@ button.search-btn.times {
 }
 
 .logout svg {
-  margin-right: 10px;
-  transform: scale(1.5);
+  font-size: 26px;
 }
 
 /***** Movie Data ****/
