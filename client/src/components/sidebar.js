@@ -36,7 +36,7 @@ const Sidebar = ({ type }) => {
           <span>Categories</span>
         </Link>
         <Link
-          to={"/categories"}
+          to={"/favourites"}
           className="center"
           data-aos="zoom-in-left"
           data-aos-duration="21000"

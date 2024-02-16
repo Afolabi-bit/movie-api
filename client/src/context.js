@@ -5,7 +5,8 @@ import React, {
   createContext,
   useCallback,
 } from "react";
-
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "./server/firebaseConfig";
 export const AppContext = createContext();
 
 const trendingMovie = "https://api.themoviedb.org/3/trending/movie/day";
@@ -41,6 +42,33 @@ export const AppProvider = ({ children }) => {
   });
   const [signInData, setSignInData] = useState({ email: "", password: "" });
   const [currentUser, setCurrentUser] = useState(null);
+  const [favourites, setFavourites] = useState([]);
+
+  //
+  const favouritesCollectionRef = collection(db, "favourites");
+
+  const unique = (arr) => {
+    let output = arr.filter((val, index, self) => {
+      return index === self.indexOf(val);
+    });
+    setFavourites(output);
+  };
+
+  const getFavourites = async () => {
+    try {
+      const data = await getDocs(favouritesCollectionRef);
+      const filteredData = data.docs.map((doc) => ({
+        ...doc.data(),
+        docId: doc.id,
+      }));
+      unique(filteredData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getFavourites();
+  }, []);
 
   /** Movie data */
 
@@ -195,6 +223,8 @@ export const AppProvider = ({ children }) => {
         setCurrentUser,
         signInData,
         setSignInData,
+        favourites,
+        setFavourites,
       }}
     >
       {children}

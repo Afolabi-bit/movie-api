@@ -9,6 +9,7 @@ import Error from "./pages/error";
 import Categories from "./pages/categories";
 import AuthPage from "./server/auth";
 import Profile from "./pages/profile";
+import Favourites from "./pages/Favourites";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/categories" element={<Categories />}></Route>
         <Route path="/signin" element={<AuthPage />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
+        <Route path="/favourites" element={<Favourites />}></Route>
         <Route path="*" element={<Error />}></Route>
       </Routes>
     </Router>

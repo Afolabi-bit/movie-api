@@ -366,11 +366,6 @@ button.search-btn.times {
   pointer-events: none;
 }
 
-.card .fave-btn.selected svg {
-  color: #c50f28;
-  animation: pop 0.3s;
-}
-
 @keyframes pop {
   0% {
     scale: 1.5;
@@ -393,6 +388,15 @@ button.search-btn.times {
   .fave-btn:hover {
     background-color: hsla(0, 24%, 46%, 0.575);
   }
+}
+
+.card.selected .fave-btn {
+  background-color: hsla(0, 24%, 46%, 0.575);
+}
+
+.card.selected .fave-btn svg {
+  color: #c50f28;
+  animation: pop 0.3s;
 }
 
 .card .link {
